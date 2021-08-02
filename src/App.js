@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Users from './components/Users/Users.jsx';
 import userExample from './Data/userExample';
@@ -28,8 +28,11 @@ function App() {
     const filteredUsers = [];
 
     userData.forEach((user) => {
-      if (!sexFilter.some((sex) => sex === user.sex)) {
-        filteredUsers.push(user);
+      for (let x = 0; x < sexFilter.length; x += 1) {
+        if (user.sex === sexFilter[x]) {
+          filteredUsers.push(user);
+          break;
+        }
       }
     });
 
@@ -37,19 +40,33 @@ function App() {
   };
 
   const changeSexFilter = (newSex) => {
-    console.log(sexFilter.includes(newSex));
     if (sexFilter.includes(newSex)) {
       setSexFilter((prev) => prev.filter((sex) => sex !== newSex));
     } else {
       setSexFilter((prev) => [...prev, newSex]);
     }
-
-    filterUsers();
   };
+
+  const sortUsers = (order, list) => {
+    const filteredUsers = userData;
+
+    filteredUsers.sort((a, b) => a[list] > b[list]);
+
+    setVisibleUserData(filteredUsers);
+  }
+
+  useEffect(() => {
+    if (sexFilter.length > 0) {
+      filterUsers();
+    } else {
+      setVisibleUserData(userData);
+    }
+  }, [sexFilter]);
 
   return (
     <div className="App">
       <Users
+        sortUsers={sortUsers}
         handleSexFilter={changeSexFilter}
         userData={visibleUserData}
         removeUser={removeUser}

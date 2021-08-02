@@ -7,7 +7,7 @@ import UsersHeaderTools from './UsersHeaderTools/UsersHeaderTools';
 
 import useStyles from './Styles';
 
-const UsersHeader = ({ handleSexFilter }) => {
+const UsersHeader = ({ handleSexFilter, sortUsers }) => {
   const [expandedHeader, setExpandedHeader] = useState(false);
   const classes = useStyles();
 
@@ -20,6 +20,9 @@ const UsersHeader = ({ handleSexFilter }) => {
       <div className={classes.usersHeader}>
         <div className={classes.name}>
           <Typography>First Name</Typography>
+          <IconButton onClick={() => sortUsers('beep', 'firstName')}>
+            <ExpandLessIcon />
+          </IconButton>
         </div>
         <Divider orientation="vertical" flexItem />
         <div className={classes.name}>

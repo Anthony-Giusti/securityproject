@@ -16,7 +16,7 @@ import User from '../User/User';
 import EditModal from '../EditModal/EditModal';
 import UsersHeader from './UsersHeader/UsersHeader';
 
-const Users = ({ userData, removeUser, submitEditedUser, handleSexFilter }) => {
+const Users = ({ userData, removeUser, submitEditedUser, handleSexFilter, sortUsers }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -49,7 +49,7 @@ const Users = ({ userData, removeUser, submitEditedUser, handleSexFilter }) => {
 
   return (
     <div className={classes.usersMain}>
-      <UsersHeader handleSexFilter={handleSexFilter} />
+      <UsersHeader handleSexFilter={handleSexFilter} sortUsers={sortUsers}/>
       {userData.map((user) => (
         <User
           user={user}
