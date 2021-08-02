@@ -5,14 +5,14 @@ import userExample from './Data/userExample';
 
 function App() {
   const [userData, setUserData] = useState(userExample);
-  const [filteredUserData, setFiltereduserData] = useState(userExample);
+  const [visibleUserData, setVisibleUserData] = useState(userExample);
   const [sexFilter, setSexFilter] = useState([]);
 
   const removeUser = (userId) => {
     const newUsers = userData.filter((user) => user.id !== userId);
 
     setUserData(newUsers);
-    setFiltereduserData(newUsers);
+    setVisibleUserData(newUsers);
   };
 
   const editUser = (editedUser) => {
@@ -21,7 +21,19 @@ function App() {
     newUsers.splice(userIndex, 1, editedUser);
 
     setUserData(newUsers);
-    setFiltereduserData(newUsers);
+    setVisibleUserData(newUsers);
+  };
+
+  const filterUsers = () => {
+    const filteredUsers = [];
+
+    userData.forEach((user) => {
+      if (!sexFilter.some((sex) => sex === user.sex)) {
+        filteredUsers.push(user);
+      }
+    });
+
+    setVisibleUserData(filteredUsers);
   };
 
   const changeSexFilter = (newSex) => {
@@ -31,13 +43,15 @@ function App() {
     } else {
       setSexFilter((prev) => [...prev, newSex]);
     }
+
+    filterUsers();
   };
 
   return (
     <div className="App">
       <Users
         handleSexFilter={changeSexFilter}
-        userData={filteredUserData}
+        userData={visibleUserData}
         removeUser={removeUser}
         submitEditedUser={editUser}
       />
