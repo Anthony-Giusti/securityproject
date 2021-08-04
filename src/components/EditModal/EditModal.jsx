@@ -30,7 +30,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
   const [userSex, setUserSex] = useState(sexStringToInt(selectedUser.sex));
   const [editModalConfirmOpen, setEditModalConfirmOpen] = useState(false);
   const [userBirthday, setUserBirthday] = useState(
-    brithdayDateToString(selectedUser.birthday),
+    brithdayStringToDate(selectedUser.birthday),
   );
 
   const [firstNameError, setFirstNameError] = useState(false);
@@ -62,7 +62,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
         firstName: firstNameField.value,
         lastName: lastNameField.value,
         sex: sexIntToString(userSex),
-        birthday: brithdayStringToDate(userBirthday),
+        birthday: brithdayDateToString(userBirthday),
       };
 
       setEditModalConfirmOpen(false);
