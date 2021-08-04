@@ -49,7 +49,7 @@ const Users = ({ userData, removeUser, submitEditedUser, handleSexFilter, sortUs
 
   return (
     <div className={classes.usersMain}>
-      <UsersHeader handleSexFilter={handleSexFilter} sortUsers={sortUsers}/>
+      <UsersHeader handleSexFilter={handleSexFilter} sortUsers={sortUsers} />
       {userData.map((user) => (
         <User
           user={user}

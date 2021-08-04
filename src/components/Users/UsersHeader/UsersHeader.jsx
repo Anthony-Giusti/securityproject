@@ -8,7 +8,7 @@ import UsersHeaderTools from './UsersHeaderTools/UsersHeaderTools';
 import useStyles from './Styles';
 import SortButton from '../../SortButton/SortButton';
 
-const UsersHeader = ({ handleSexFilter, sortUsers }) => {
+const UsersHeader = ({ handleSexFilter, sortUsers, sortByBirthday }) => {
   const [expandedHeader, setExpandedHeader] = useState(false);
   const [currentSort, setCurrentSort] = useState(null);
   const classes = useStyles();
@@ -48,6 +48,7 @@ const UsersHeader = ({ handleSexFilter, sortUsers }) => {
         <Divider orientation="vertical" flexItem />
         <div className={classes.birthday}>
           <Typography>Birthday</Typography>
+          <SortButton handleSort={sortUsers} toBeSorted='birthday'/>
         </div>
         <Divider orientation="vertical" flexItem />
         <IconButton onClick={handleExpandHeader}>
