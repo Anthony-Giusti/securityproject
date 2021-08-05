@@ -7,11 +7,15 @@ import userExample from './Data/userExample';
 import NavBar from './components/NavBar/NavBar';
 import birthdayStringToDate from './components/util/functions/birthdayStringToDate';
 
+import useStyles from './Styles';
+
 function App() {
   const [userData, setUserData] = useState(userExample);
   const [visibleUserData, setVisibleUserData] = useState(userExample);
   const [sexFilter, setSexFilter] = useState([]);
   const [currentSort, setCurrentSort] = useState({property: 'id', order: 'ascending'});
+
+  const classes = useStyles();
 
   const filterUsers = (users) => {
     const filteredUsers = [];
@@ -103,18 +107,20 @@ function App() {
     <div className="App">
       <NavBar />
       <Switch>
-        <Route exact path="/">
-          <Users
-            sortUsers={handleSortUsers}
-            handleSexFilter={changeSexFilter}
-            userData={visibleUserData}
-            removeUser={removeUser}
-            submitEditedUser={editUser}
-          />
-        </Route>
-        <Route path="/create-user">
-          <CreateUser />
-        </Route>
+        <div className={classes.appMain}>
+          <Route exact path="/">
+            <Users
+              sortUsers={handleSortUsers}
+              handleSexFilter={changeSexFilter}
+              userData={visibleUserData}
+              removeUser={removeUser}
+              submitEditedUser={editUser}
+            />
+          </Route>
+          <Route path="/create-user">
+            <CreateUser />
+          </Route>
+        </div>
       </Switch>
      
     </div>
