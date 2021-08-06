@@ -16,7 +16,13 @@ import User from '../User/User';
 import EditModal from '../EditModal/EditModal';
 import UsersHeader from './UsersHeader/UsersHeader';
 
-const Users = ({ userData, removeUser, submitEditedUser, handleSexFilter, sortUsers }) => {
+const Users = ({
+  userData,
+  removeUser,
+  submitEditedUser,
+  handleSexFilter,
+  sortUsers,
+}) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
