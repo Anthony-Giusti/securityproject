@@ -13,6 +13,10 @@ const User = ({ user, openEditModal, handleRemoveUser }) => {
   return (
     <Card elevation={1} className={classes.userMain}>
       <CardContent className={classes.userInfo}>
+      <span className={classes.id}>
+          <Typography>{user._id}</Typography>
+        </span>
+        <Divider orientation="vertical" flexItem />
         <span className={classes.name}>
           <Typography>{user.firstName}</Typography>
         </span>
@@ -33,11 +37,11 @@ const User = ({ user, openEditModal, handleRemoveUser }) => {
       <Divider orientation="vertical" flexItem />
 
       <CardActions className={classes.userButtons}>
-        <IconButton>
-          <EditIcon onClick={() => openEditModal(user)} />
+        <IconButton onClick={() => openEditModal(user)}>
+          <EditIcon  />
         </IconButton>
-        <IconButton>
-          <DeleteIcon onClick={() => handleRemoveUser(user)} />
+        <IconButton onClick={() => handleRemoveUser(user)}>
+          <DeleteIcon  />
         </IconButton>
       </CardActions>
     </Card>
