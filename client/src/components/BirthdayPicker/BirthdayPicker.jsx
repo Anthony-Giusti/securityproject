@@ -21,17 +21,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BirthdayPicker = ({ userBirthday, userBirthdayChange }) => {
+const BirthdayPicker = ({ userBirthday, userBirthdayChange, birthdayError }) => {
   const classes = useStyles();
 
   const handleDateChange = (newBirthday) => {
     userBirthdayChange(newBirthday);
-    console.log(newBirthday);
   };
 
   return (
     <Grid container justifyContent="space-around">
       <KeyboardDatePicker
+        error={birthdayError}
+        helperText={birthdayError ? 'Birthday must be in the past' : ''}
         disableToolbar
         variant="inline"
         format="MM/dd/yyyy"
