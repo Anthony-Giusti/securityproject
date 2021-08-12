@@ -15,6 +15,7 @@ import useStyles from "./Styles";
 import User from "../User/User";
 import EditModal from "../EditModal/EditModal";
 import UsersHeader from "./UsersHeader/UsersHeader";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const Users = ({
   userData,
@@ -58,6 +59,7 @@ const Users = ({
       <UsersHeader handleSexFilter={handleSexFilter} sortUsers={sortUsers} />
       {userData.map((user) => (
         <User
+          key={user._id}
           user={user}
           handleRemoveUser={confirmRemoveUser}
           openEditModal={openEditModal}
@@ -81,7 +83,7 @@ const Users = ({
             {selectedUser.lastName}?
           </DialogTitle>
           <DialogActions>
-            <Button onClick={() => handleRemoveUser()}>Confirm Delete</Button>
+            <Button variant="contained" startIcon={<DeleteIcon />} color="secondary" onClick={() => handleRemoveUser()}>Confirm Delete</Button>
             <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
           </DialogActions>
         </Dialog>
