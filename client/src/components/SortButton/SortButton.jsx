@@ -18,18 +18,18 @@ const SortButton = ({ handleSort, toBeSorted, selectedSortBtn }) => {
 
   return (
     <>
-      {currentDirection === "descending" && (
+      {currentDirection === "ascending" && (
         <IconButton
           color={selectedSortBtn === toBeSorted ? "secondary" : "default"}
-          onClick={() => handleClick("descending")}
+          onClick={() => handleClick("ascending")}
         >
           <ExpandLessIcon id={toBeSorted} />
         </IconButton>
       )}
-      {currentDirection === "ascending" && (
+      {currentDirection === "descending" && (
         <IconButton
           color={selectedSortBtn === toBeSorted ? "secondary" : "primary"}
-          onClick={() => handleClick("ascending")}
+          onClick={() => handleClick("descending")}
         >
           <ExpandMoreIcon id={toBeSorted} />
         </IconButton>
