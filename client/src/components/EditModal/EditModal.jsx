@@ -13,10 +13,13 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+import CheckIcon from '@material-ui/icons/Check';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import isAlpha from "validator/es/lib/isAlpha";
+import useStyles from './styles';
 
 import BirthdayPicker from "../BirthdayPicker/BirthdayPicker";
 
@@ -35,6 +38,8 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
 
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
+
+  const classes = useStyles();
 
   let firstNameField;
   let lastNameField;
@@ -58,7 +63,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
 
     if (!errorsFound) {
       const editedUser = {
-        id: selectedUser.id,
+        _id: selectedUser._id,
         firstName: firstNameField.value,
         lastName: lastNameField.value,
         sex: sexIntToString(userSex),
@@ -109,7 +114,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
     <>
       <Dialog open={editModalOpen} onClose={handleModalClose}>
         <DialogTitle>Edit User</DialogTitle>
-        <DialogContent>
+        <DialogContent className={classes.userFields}>
           <TextField
             error={firstNameError}
             onChange={editMade}
@@ -149,10 +154,10 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
           </MuiPickersUtilsProvider>
         </DialogContent>
         <DialogActions>
-          <Button onClick={confrimEdits} disabled={!isEdited}>
+          <Button variant="contained" startIcon={<CheckIcon />} className={classes.negitiveBtn} color={'primary'} onClick={confrimEdits} disabled={!isEdited}>
             Confirm Edits
           </Button>
-          <Button onClick={() => closeEditModal("discard", null)}>
+          <Button className={classes.negitiveBtn} onClick={() => closeEditModal("discard", null)}>
             Cancel
           </Button>
         </DialogActions>
@@ -161,8 +166,8 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
       <Dialog open={editModalConfirmOpen}>
         <DialogContent>
           <Typography>Confirm edits before closing?</Typography>
-          <Button onClick={confrimEdits}>Confirm Edits</Button>
-          <Button onClick={discardEdits}>Discard Edits</Button>
+          <Button variant="contained" startIcon={<CheckIcon />} color={'primary'} onClick={confrimEdits}>Confirm Edits</Button>
+          <Button variant="contained" startIcon={<DeleteIcon />}  color={'secondary'}  onClick={discardEdits}>Discard Edits</Button>
           <Button onClick={cancelEdits}>Cancel</Button>
         </DialogContent>
       </Dialog>
