@@ -14,10 +14,11 @@ const NavBar = () => {
   return (
     <AppBar className={classes.navBarMain}>
       <Toolbar>
-        <Button endIcon={<ListIcon />} onClick={() => history.push("/")}>
+        <Button variant="contained" endIcon={<ListIcon />} onClick={() => history.push("/")}>
           <Typography>Users</Typography>
         </Button>
         <Button
+          variant="contained"
           endIcon={<AddIcon />}
           onClick={() => history.push("/create-user")}
         >
