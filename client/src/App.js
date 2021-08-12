@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
@@ -25,6 +25,7 @@ function App() {
   });
 
   const classes = useStyles();
+  const history = useHistory();
 
   const fetchUserData = async () => {
     await api
@@ -117,18 +118,29 @@ function App() {
     }
   };
 
-  const removeUser = (userId) => {
-    const newUsers = userData.filter((user) => user.id !== userId);
+  const createUser = (newUser) => {
+    setUserData([...userData, newUser])
 
+     api.post("/createNewUser", { newUser }).then((response) => {
+      console.log(response);
+      history.push('/');
+    })
+  }
+
+  const removeUser = (userId) => {
+    const newUsers = userData.filter((user) => user._id !== userId);
     setUserData(newUsers);
+
+    api.get(`/deleteUser?userId=${userId}`);
   };
 
   const editUser = (editedUser) => {
     const newUsers = [...userData];
-    const userIndex = userData.findIndex((user) => user.id === editedUser.id);
+    const userIndex = userData.findIndex((user) => user._id === editedUser._id);
     newUsers.splice(userIndex, 1, editedUser);
 
     setUserData(newUsers);
+    api.post("/editUser", {editedUser});
   };
 
   useEffect(() => {
@@ -154,7 +166,7 @@ function App() {
             />
           </Route>
           <Route path="/create-user">
-            <CreateUser />
+            <CreateUser submitUser={createUser} />
           </Route>
         </div>
       </Switch>
