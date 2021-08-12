@@ -10,7 +10,7 @@ import SortButton from "../../SortButton/SortButton";
 
 const UsersHeader = ({ handleSexFilter, sortUsers }) => {
   const [expandedHeader, setExpandedHeader] = useState(false);
-  const [selectedSortBtn, setSelectedSortBtn] = useState("id");
+  const [selectedSortBtn, setSelectedSortBtn] = useState("_id");
   const classes = useStyles();
 
   const handleSort = (direction, toBeSorted) => {
@@ -30,7 +30,7 @@ const UsersHeader = ({ handleSexFilter, sortUsers }) => {
           <Typography>ID</Typography>
           <SortButton
             handleSort={handleSort}
-            toBeSorted="id"
+            toBeSorted="_id"
             selectedSortBtn={selectedSortBtn}
           />
         </div>
