@@ -8,7 +8,9 @@ import userExample from "./Data/userExample";
 import NavBar from "./components/NavBar/NavBar";
 import birthdayStringToDate from "./components/util/functions/birthdayStringToDate";
 
+import Theme from './Themes/Theme';
 import useStyles from "./Styles";
+import { ThemeProvider } from "@material-ui/styles";
 
 const api = axios.create({
   baseURL: "http://localhost:5000/",
@@ -16,11 +18,11 @@ const api = axios.create({
 
 
 function App() {
-  const [userData, setUserData] = useState(userExample);
-  const [visibleUserData, setVisibleUserData] = useState(userExample);
+  const [userData, setUserData] = useState([]);
+  const [visibleUserData, setVisibleUserData] = useState([]);
   const [sexFilter, setSexFilter] = useState([]);
   const [currentSort, setCurrentSort] = useState({
-    property: "id",
+    property: "_id",
     order: "ascending",
   });
 
@@ -35,10 +37,7 @@ function App() {
         },
       })
       .then((response) => {
-        console.log(response.data)
         const data = Object.values(response.data)
-        console.log(data[0])
-        console.log(data)
         setUserData(data);
       });
   };
@@ -90,11 +89,11 @@ function App() {
     const filteredUsers = users;
 
     if (order === "descending") {
-      filteredUsers.sort((a, b) => (a[list] > b[list] ? 1 : -1));
+      filteredUsers.sort((a, b) => (a[list].toLowerCase() > b[list].toLowerCase() ? 1 : -1));
     }
 
     if (order === "ascending") {
-      filteredUsers.sort((a, b) => (a[list] < b[list] ? 1 : -1));
+      filteredUsers.sort((a, b) => (a[list].toLowerCase() < b[list].toLowerCase() ? 1 : -1));
     }
 
     return filteredUsers;
@@ -152,7 +151,8 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
+    <ThemeProvider theme={Theme}>
+      <div className="App">
       <NavBar />
       <Switch>
         <div className={classes.appMain}>
@@ -171,6 +171,7 @@ function App() {
         </div>
       </Switch>
     </div>
+    </ThemeProvider>
   );
 }
 
