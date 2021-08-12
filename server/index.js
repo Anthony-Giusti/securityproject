@@ -19,6 +19,9 @@ const createNewUser = async (newUser) => {
 };
 
 const editUser = async (user) => {
+  console.log(user._id);
+  console.log(ObjectID(user._id));
+  console.log(typeof user._id);
   const result = await userData.updateOne(
     { _id: ObjectID("610d92d779431b960fc2a5fb") },
     { $set: user }
@@ -53,28 +56,26 @@ const main = async () => {
     await client.connect();
     userData = client.db("user-data").collection("users");
 
-    const newBob = {
-      firstName: "Bob",
-      lastName: "Jobs",
-      sex: "M",
-      birthDay: "10-24-1995",
-    };
+    // const newBob = {
+    //   firstName: "Bob",
+    //   lastName: "Jobs",
+    //   sex: "M",
+    //   birthDay: "10-24-1995",
+    // };
 
     // await updateUser(client, 'id', newBob);
 
-    await createNewUser(client, {
-      firstName: 'Bob',
-      lastName: 'Jobs',
-      sex: 'M',
-      birthDay: '10-24-1991',
-    });
+    // await createNewUser(client, {
+    //   firstName: 'Bob',
+    //   lastName: 'Jobs',
+    //   sex: 'M',
+    //   birthDay: '10-24-1991',
+    // });
 
     // await deleteUser(ObjectID('610d92d779431b960fc2a5fb'));
     getUserData();
 
     // const dataBases = await client.db().admin().listDatabases();
-
-    // console.log(dataBases.databases);
   } catch (error) {
     console.log(error);
   } finally {
@@ -94,16 +95,14 @@ app.post("/createNewUser", async (req, res) => {
 });
 
 app.post("/editUser", async (req, res) => {
-  const reponse = editUser(req.editedUser);
+  editUser(req.body.editedUser);
 });
 
 app.get("/deleteUser", async (req, res) => {
   console.log(req.query.userId);
   const response = deleteUser(req.query.userId);
-
-  // res.get(response);
 });
 
 main().catch(console.error);
 
-app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
