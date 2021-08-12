@@ -15,9 +15,7 @@ let client;
 let userData;
 
 const createNewUser = async (newUser) => {
-  const result = await userData.insertOne(newUser);
-
-  console.log(`New user created ${result.insertedId}`);
+  await userData.insertOne(newUser);
 };
 
 const editUser = async (user) => {
@@ -25,13 +23,11 @@ const editUser = async (user) => {
     { _id: ObjectID("610d92d779431b960fc2a5fb") },
     { $set: user }
   );
-
-  console.log(result.matchedCount);
-  console.log(result.modifiedCount);
 };
 
 const deleteUser = async (userId) => {
-  await userData.deleteOne({ _id: userId });
+  console.log(userId);
+  await userData.deleteOne({ _id: ObjectID(userId) });
 };
 
 const listBetty = async (client) => {
@@ -66,12 +62,12 @@ const main = async () => {
 
     // await updateUser(client, 'id', newBob);
 
-    // await createNewUser(client, {
-    //   firstName: 'Bob',
-    //   lastName: 'Jobs',
-    //   sex: 'M',
-    //   birthDay: '10-24-1991',
-    // });
+    await createNewUser(client, {
+      firstName: 'Bob',
+      lastName: 'Jobs',
+      sex: 'M',
+      birthDay: '10-24-1991',
+    });
 
     // await deleteUser(ObjectID('610d92d779431b960fc2a5fb'));
     getUserData();
@@ -93,7 +89,8 @@ app.get("/getUserData", async (req, res) => {
 });
 
 app.post("/createNewUser", async (req, res) => {
-  const response = createNewUser(req.newUser);
+  const response = createNewUser(req.body.newUser);
+  res.send(response);
 });
 
 app.post("/editUser", async (req, res) => {
@@ -101,7 +98,10 @@ app.post("/editUser", async (req, res) => {
 });
 
 app.get("/deleteUser", async (req, res) => {
-  const response = deleteUser(req.userID);
+  console.log(req.query.userId);
+  const response = deleteUser(req.query.userId);
+
+  // res.get(response);
 });
 
 main().catch(console.error);
