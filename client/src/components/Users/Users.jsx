@@ -48,7 +48,7 @@ const Users = ({
   };
 
   const handleRemoveUser = () => {
-    removeUser(selectedUser.id);
+    removeUser(selectedUser._id);
     setSelectedUser(null);
     setDeleteDialogOpen(false);
   };
