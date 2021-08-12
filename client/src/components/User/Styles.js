@@ -7,18 +7,21 @@ export default makeStyles({
   },
   userInfo: {
     display: "flex",
-    flexBasis: "90%",
+    width: "90%",
+  },
+  id: {
+    width: "20%",
   },
   name: {
-    flexBasis: "30%",
+    width: "25%",
   },
   sex: {
-    flexBasis: "10%",
+    width: "5%",
   },
   birthday: {
-    flexBasis: "30%",
+    width: "25%",
   },
   userButtons: {
-    flexBasis: "10%",
+    // width: "10%",
   },
 });
