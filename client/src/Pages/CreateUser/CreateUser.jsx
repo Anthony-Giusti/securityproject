@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 
-
+import useStyles from './styles'; 
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import isAlpha from "validator/es/lib/isAlpha";
@@ -25,10 +25,13 @@ const CreateUser = ({submitUser}) => {
   const [lastNameError, setLastNameError] = useState(false);
   const [birthdayError, setBirthdayError] = useState(false);
   const [userBirthday, setUserBirthday] = useState(new Date());
-  const [userSex, setUserSex] = useState(3)
+  const [userSex, setUserSex] = useState(3);
+
+  const classes = useStyles();
 
   let firstNameField;
   let lastNameField;
+
 
   const handleSubmit = () => {
     let errorsFound = false;
@@ -82,7 +85,7 @@ const CreateUser = ({submitUser}) => {
   return (
     <div>
       <Typography>New User</Typography>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={classes.createUserForm}>
         <TextField
           error={firstNameError}
           label="First Name"
@@ -118,7 +121,7 @@ const CreateUser = ({submitUser}) => {
         </MuiPickersUtilsProvider>
       </form>
 
-      <Button onClick={handleSubmit}>Submit New User</Button>
+      <Button variant="contained" color="primary" onClick={handleSubmit}>Submit New User</Button>
     </div>
   );
 };
