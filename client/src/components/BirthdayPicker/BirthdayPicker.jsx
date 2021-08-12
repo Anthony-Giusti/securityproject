@@ -10,15 +10,15 @@ import {
 import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-  },
+  // container: {
+  //   display: "flex",
+  //   flexWrap: "wrap",
+  // },
+  // textField: {
+  //   marginLeft: theme.spacing(1),
+  //   marginRight: theme.spacing(1),
+  //   width: 200,
+  // },
 }));
 
 const BirthdayPicker = ({ userBirthday, userBirthdayChange, birthdayError }) => {
@@ -29,14 +29,14 @@ const BirthdayPicker = ({ userBirthday, userBirthdayChange, birthdayError }) => 
   };
 
   return (
-    <Grid container justifyContent="space-around">
+    <>
       <KeyboardDatePicker
         error={birthdayError}
         helperText={birthdayError ? 'Birthday must be in the past' : ''}
         disableToolbar
         variant="inline"
         format="MM/dd/yyyy"
-        margin="normal"
+        // margin="normal"
         id="date-picker-inline"
         label="Date picker inline"
         value={userBirthday}
@@ -45,7 +45,7 @@ const BirthdayPicker = ({ userBirthday, userBirthdayChange, birthdayError }) => 
           "aria-label": "change date",
         }}
       />
-    </Grid>
+    </>
   );
 };
 
