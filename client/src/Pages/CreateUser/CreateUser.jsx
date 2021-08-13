@@ -19,6 +19,7 @@ import useStyles from './styles';
 import BirthdayPicker from '../../components/BirthdayPicker/BirthdayPicker';
 import brithdayDateToString from '../../components/util/functions/birthdayDateToString';
 import sexIntToString from '../../components/util/functions/sexIntToString';
+import createDateAndTimeString from '../../components/util/functions/createDateAndTimeString';
 
 const CreateUser = ({ submitUser }) => {
   const [firstNameError, setFirstNameError] = useState(false);
@@ -54,11 +55,15 @@ const CreateUser = ({ submitUser }) => {
     }
 
     if (!errorsFound) {
+      const createDateAndTime = createDateAndTimeString();
+
       const newUser = {
         firstName: firstNameField.value,
         lastName: lastNameField.value,
         sex: sexIntToString(userSex),
         birthday: brithdayDateToString(userBirthday),
+        created: createDateAndTime,
+        lastEdit: createDateAndTime,
       };
 
       submitUser(newUser);
