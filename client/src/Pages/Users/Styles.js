@@ -11,12 +11,12 @@ export default makeStyles({
     padding: 16,
   },
   name: {
-    flexBasis: '30%',
+    width: '30%',
   },
   sex: {
-    flexBasis: '10%',
+    width: '100%',
   },
   birthday: {
-    flexBasis: '30%',
+    width: '30%',
   },
 });

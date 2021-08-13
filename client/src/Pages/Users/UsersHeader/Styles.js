@@ -7,16 +7,20 @@ export default makeStyles({
   },
   usersHeader: {
     display: 'flex',
+    width: '100%',
+    padding: 0,
+  },
+  usersDivders: {
+    display: 'flex',
     width: '90%',
-    padding: 16,
   },
   name: {
-    flexBasis: '30%',
+    width: '35%',
   },
   sex: {
-    flexBasis: '10%',
+    width: '10%',
   },
   birthday: {
-    flexBasis: '30%',
+    width: '20%',
   },
 });

@@ -9,13 +9,13 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'date-fns';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import useStyles from './Styles';
-import User from '../User/User';
-import EditModal from '../EditModal/EditModal';
+import User from '../../components/User/User';
+import EditModal from '../../components/EditModal/EditModal';
 import UsersHeader from './UsersHeader/UsersHeader';
 
 const Users = ({
@@ -24,6 +24,7 @@ const Users = ({
   submitEditedUser,
   handleSexFilter,
   sortUsers,
+  fetchUserData,
 }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -54,6 +55,10 @@ const Users = ({
     setSelectedUser(null);
     setDeleteDialogOpen(false);
   };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   return (
     <div className={classes.usersMain}>
