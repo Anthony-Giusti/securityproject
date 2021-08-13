@@ -1,7 +1,7 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const { ObjectID } = require("bson");
-const cors = require("cors")
+const cors = require("cors");
 
 const app = express();
 app.use(cors({
@@ -19,25 +19,21 @@ const createNewUser = async (newUser) => {
 };
 
 const editUser = async (user) => {
-  console.log(user._id);
-  console.log(ObjectID(user._id));
-  console.log(typeof user._id);
   const result = await userData.updateOne(
-    { _id: ObjectID("610d92d779431b960fc2a5fb") },
-    { $set: user }
+    { _id: ObjectID(user._id) },
+    { $set: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      birthday: user.birthday,
+      sex: user.sex,
+      lastEdit: user.lastEdit,
+    } }
   );
 };
 
 const deleteUser = async (userId) => {
   console.log(userId);
   await userData.deleteOne({ _id: ObjectID(userId) });
-};
-
-const listBetty = async (client) => {
-  //   console.log(client);
-  const databases = await client.db().admin().listDatabases();
-
-  console.log(databases.databases);
 };
 
 const getUserData = async () => {
@@ -56,26 +52,6 @@ const main = async () => {
     await client.connect();
     userData = client.db("user-data").collection("users");
 
-    // const newBob = {
-    //   firstName: "Bob",
-    //   lastName: "Jobs",
-    //   sex: "M",
-    //   birthDay: "10-24-1995",
-    // };
-
-    // await updateUser(client, 'id', newBob);
-
-    // await createNewUser(client, {
-    //   firstName: 'Bob',
-    //   lastName: 'Jobs',
-    //   sex: 'M',
-    //   birthDay: '10-24-1991',
-    // });
-
-    // await deleteUser(ObjectID('610d92d779431b960fc2a5fb'));
-    getUserData();
-
-    // const dataBases = await client.db().admin().listDatabases();
   } catch (error) {
     console.log(error);
   } finally {
@@ -85,7 +61,6 @@ const main = async () => {
 
 app.get("/getUserData", async (req, res) => {
   const response = await getUserData();
-  console.log(response);
   res.send(response);
 });
 
@@ -95,12 +70,13 @@ app.post("/createNewUser", async (req, res) => {
 });
 
 app.post("/editUser", async (req, res) => {
-  editUser(req.body.editedUser);
+  const response = editUser(req.body.editedUser);
+  res.send(response);
 });
 
 app.get("/deleteUser", async (req, res) => {
-  console.log(req.query.userId);
   const response = deleteUser(req.query.userId);
+  res.send(response);
 });
 
 main().catch(console.error);
