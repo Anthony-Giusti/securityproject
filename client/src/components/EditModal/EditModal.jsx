@@ -7,6 +7,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Divider,
   FormControl,
   InputLabel,
   MenuItem,
@@ -28,6 +29,7 @@ import sexIntToString from '../util/functions/sexIntToString';
 import sexStringToInt from '../util/functions/sexStringToInt';
 import brithdayDateToString from '../util/functions/birthdayDateToString';
 import brithdayStringToDate from '../util/functions/birthdayStringToDate';
+import createDateAndTimeString from '../util/functions/createDateAndTimeString';
 
 const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
   const [isEdited, setIsEdited] = useState(false);
@@ -69,6 +71,8 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
         lastName: lastNameField.value,
         sex: sexIntToString(userSex),
         birthday: brithdayDateToString(userBirthday),
+        created: selectedUser.created,
+        lastEdit: createDateAndTimeString(),
       };
 
       setEditModalConfirmOpen(false);
@@ -114,46 +118,83 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
   return (
     <>
       <Dialog open={editModalOpen} onClose={handleModalClose}>
-        <DialogTitle>Edit User</DialogTitle>
-        <DialogContent className={classes.userFields}>
-          <TextField
-            error={firstNameError}
-            onChange={editMade}
-            label="First Name"
-            helperText={firstNameError ? 'Must contain only letters' : ''}
-            defaultValue={selectedUser.firstName}
-            inputRef={(ref) => {
-              firstNameField = ref;
-            }}
-          />
+        <DialogTitle className={classes.title}>
+          <Typography variant="h2">Edit User</Typography>
+          <Typography gutterBottom variant="caption">
+            ID: {selectedUser._id}
+          </Typography>
+        </DialogTitle>
 
-          <TextField
-            error={lastNameError}
-            onChange={editMade}
-            label="Last Name"
-            helperText={lastNameError ? 'Must contain only letters' : ''}
-            defaultValue={selectedUser.lastName}
-            inputRef={(ref) => {
-              lastNameField = ref;
-            }}
-          />
+        <DialogContent>
+          <div>
+            <span className={classes.dateBox}>
+              <Typography className={classes.dateTitle}>
+                Date Created:
+              </Typography>
+              <Typography className={classes.date}>
+                {selectedUser.created}
+              </Typography>
+            </span>
+            <Divider />
+            <span className={classes.dateBox}>
+              <Typography className={classes.dateTitle}>
+                Last Edited:
+              </Typography>
+              <Typography className={classes.date}>
+                {selectedUser.lastEdit}
+              </Typography>
+            </span>
+          </div>
 
-          <FormControl>
-            <InputLabel>Sex</InputLabel>
-            <Select onChange={userSexChange} defaultValue={userSex}>
-              <MenuItem value={1}>M</MenuItem>
-              <MenuItem value={2}>F</MenuItem>
-              <MenuItem value={3}>NB</MenuItem>
-            </Select>
-          </FormControl>
+          <Divider />
 
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <BirthdayPicker
-              userBirthday={userBirthday}
-              userBirthdayChange={userBirthdayChange}
+          <div className={classes.userFields}>
+            <TextField
+              variant="outlined"
+              error={firstNameError}
+              onChange={editMade}
+              label="First Name"
+              helperText={firstNameError ? 'Must contain only letters' : ''}
+              defaultValue={selectedUser.firstName}
+              inputRef={(ref) => {
+                firstNameField = ref;
+              }}
             />
-          </MuiPickersUtilsProvider>
+
+            <TextField
+              variant="outlined"
+              error={lastNameError}
+              onChange={editMade}
+              label="Last Name"
+              helperText={lastNameError ? 'Must contain only letters' : ''}
+              defaultValue={selectedUser.lastName}
+              inputRef={(ref) => {
+                lastNameField = ref;
+              }}
+            />
+
+            <FormControl>
+              <InputLabel>Sex</InputLabel>
+              <Select
+                variant="outlined"
+                onChange={userSexChange}
+                defaultValue={userSex}
+              >
+                <MenuItem value={1}>M</MenuItem>
+                <MenuItem value={2}>F</MenuItem>
+                <MenuItem value={3}>NB</MenuItem>
+              </Select>
+            </FormControl>
+
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <BirthdayPicker
+                userBirthday={userBirthday}
+                userBirthdayChange={userBirthdayChange}
+              />
+            </MuiPickersUtilsProvider>
+          </div>
         </DialogContent>
+
         <DialogActions>
           <Button
             variant="contained"
