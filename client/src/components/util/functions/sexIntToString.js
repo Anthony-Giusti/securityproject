@@ -1,11 +1,11 @@
 const sexIntToString = (sex) => {
   switch (sex) {
     case 1:
-      return "M";
+      return 'M';
     case 2:
-      return "F";
+      return 'F';
     default:
-      return "NB";
+      return 'NB';
   }
 };
 

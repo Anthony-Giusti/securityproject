@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
 import {
   Button,
   FormControl,
@@ -7,20 +8,19 @@ import {
   Select,
   TextField,
   Typography,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import useStyles from './styles'; 
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
-import isAlpha from "validator/es/lib/isAlpha";
-import isBefore from "validator/es/lib/isBefore";
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+import isAlpha from 'validator/es/lib/isAlpha';
+import isBefore from 'validator/es/lib/isBefore';
+import useStyles from './styles';
 
+import BirthdayPicker from '../../components/BirthdayPicker/BirthdayPicker';
+import brithdayDateToString from '../../components/util/functions/birthdayDateToString';
+import sexIntToString from '../../components/util/functions/sexIntToString';
 
-import BirthdayPicker from "../../components/BirthdayPicker/BirthdayPicker";
-import brithdayDateToString from "../../components/util/functions/birthdayDateToString";
-import sexIntToString from "../../components/util/functions/sexIntToString";
-
-const CreateUser = ({submitUser}) => {
+const CreateUser = ({ submitUser }) => {
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
   const [birthdayError, setBirthdayError] = useState(false);
@@ -31,7 +31,6 @@ const CreateUser = ({submitUser}) => {
 
   let firstNameField;
   let lastNameField;
-
 
   const handleSubmit = () => {
     let errorsFound = false;
@@ -63,24 +62,22 @@ const CreateUser = ({submitUser}) => {
       };
 
       submitUser(newUser);
-  }
-}
+    }
+  };
 
   const handleBirthdayChange = (birthday) => {
-    if(isBefore(brithdayDateToString(birthday, new Date()))){
+    if (isBefore(brithdayDateToString(birthday, new Date()))) {
       setUserBirthday(birthday);
       setBirthdayError(false);
     } else {
       setUserBirthday(new Date());
       setBirthdayError(true);
     }
-
-    
-  }
+  };
 
   const handleUserSexChange = (e) => {
     setUserSex(e.target.value);
-  }
+  };
 
   return (
     <div>
@@ -106,7 +103,7 @@ const CreateUser = ({submitUser}) => {
 
         <FormControl>
           <InputLabel>Sex</InputLabel>
-          <Select  onChange={handleUserSexChange} defaultValue={3}>
+          <Select onChange={handleUserSexChange} defaultValue={3}>
             <MenuItem value={1}>M</MenuItem>
             <MenuItem value={2}>F</MenuItem>
             <MenuItem value={3}>NB</MenuItem>
@@ -114,14 +111,17 @@ const CreateUser = ({submitUser}) => {
         </FormControl>
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <BirthdayPicker 
+          <BirthdayPicker
             userBirthday={userBirthday}
-             userBirthdayChange={handleBirthdayChange} 
-             birthdayError={birthdayError} />
+            userBirthdayChange={handleBirthdayChange}
+            birthdayError={birthdayError}
+          />
         </MuiPickersUtilsProvider>
       </form>
 
-      <Button variant="contained" color="primary" onClick={handleSubmit}>Submit New User</Button>
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
+        Submit New User
+      </Button>
     </div>
   );
 };

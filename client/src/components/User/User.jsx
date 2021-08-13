@@ -1,11 +1,12 @@
-import { Card, CardActions, CardContent, Typography } from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
-import React, { useState } from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import IconButton from "@material-ui/core/IconButton";
+/* eslint-disable react/prop-types */
+import { Card, CardActions, CardContent, Typography } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import React, { useState } from 'react';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton';
 
-import useStyles from "./Styles";
+import useStyles from './Styles';
 
 const User = ({ user, openEditModal, handleRemoveUser }) => {
   const classes = useStyles();
@@ -13,7 +14,7 @@ const User = ({ user, openEditModal, handleRemoveUser }) => {
   return (
     <Card elevation={1} className={classes.userMain}>
       <CardContent className={classes.userInfo}>
-      <span className={classes.id}>
+        <span className={classes.id}>
           <Typography>{user._id}</Typography>
         </span>
         <Divider orientation="vertical" flexItem />
@@ -38,10 +39,10 @@ const User = ({ user, openEditModal, handleRemoveUser }) => {
 
       <CardActions className={classes.userButtons}>
         <IconButton onClick={() => openEditModal(user)}>
-          <EditIcon  />
+          <EditIcon />
         </IconButton>
         <IconButton onClick={() => handleRemoveUser(user)}>
-          <DeleteIcon  />
+          <DeleteIcon />
         </IconButton>
       </CardActions>
     </Card>

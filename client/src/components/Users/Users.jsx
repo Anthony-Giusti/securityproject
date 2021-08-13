@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Button,
   Card,
@@ -7,15 +8,15 @@ import {
   DialogTitle,
   TextField,
   Typography,
-} from "@material-ui/core";
-import React, { useState } from "react";
-import "date-fns";
+} from '@material-ui/core';
+import React, { useState } from 'react';
+import 'date-fns';
 
-import useStyles from "./Styles";
-import User from "../User/User";
-import EditModal from "../EditModal/EditModal";
-import UsersHeader from "./UsersHeader/UsersHeader";
 import DeleteIcon from '@material-ui/icons/Delete';
+import useStyles from './Styles';
+import User from '../User/User';
+import EditModal from '../EditModal/EditModal';
+import UsersHeader from './UsersHeader/UsersHeader';
 
 const Users = ({
   userData,
@@ -36,7 +37,7 @@ const Users = ({
   };
 
   const closeEditModal = (action, editedUser) => {
-    if (action === "submit") {
+    if (action === 'submit') {
       submitEditedUser(editedUser);
     }
     setEditModalOpen(false);
@@ -79,11 +80,18 @@ const Users = ({
           onClose={() => setDeleteDialogOpen(false)}
         >
           <DialogTitle>
-            Confirm deletion of user {selectedUser.firstName}{" "}
+            Confirm deletion of user {selectedUser.firstName}{' '}
             {selectedUser.lastName}?
           </DialogTitle>
           <DialogActions>
-            <Button variant="contained" startIcon={<DeleteIcon />} color="secondary" onClick={() => handleRemoveUser()}>Confirm Delete</Button>
+            <Button
+              variant="contained"
+              startIcon={<DeleteIcon />}
+              color="secondary"
+              onClick={() => handleRemoveUser()}
+            >
+              Confirm Delete
+            </Button>
             <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
           </DialogActions>
         </Dialog>

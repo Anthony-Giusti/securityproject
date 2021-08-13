@@ -1,13 +1,14 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import date from "date-and-time";
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import date from 'date-and-time';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
-} from "@material-ui/pickers";
-import { Grid } from "@material-ui/core";
+} from '@material-ui/pickers';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   // container: {
@@ -21,7 +22,11 @@ const useStyles = makeStyles((theme) => ({
   // },
 }));
 
-const BirthdayPicker = ({ userBirthday, userBirthdayChange, birthdayError }) => {
+const BirthdayPicker = ({
+  userBirthday,
+  userBirthdayChange,
+  birthdayError,
+}) => {
   const classes = useStyles();
 
   const handleDateChange = (newBirthday) => {
@@ -42,7 +47,7 @@ const BirthdayPicker = ({ userBirthday, userBirthdayChange, birthdayError }) => 
         value={userBirthday}
         onChange={handleDateChange}
         KeyboardButtonProps={{
-          "aria-label": "change date",
+          'aria-label': 'change date',
         }}
       />
     </>

@@ -1,25 +1,25 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core';
 
 export default makeStyles({
   userMain: {
-    display: "flex",
-    width: "100%",
+    display: 'flex',
+    width: '100%',
   },
   userInfo: {
-    display: "flex",
-    width: "90%",
+    display: 'flex',
+    width: '90%',
   },
   id: {
-    width: "20%",
+    width: '20%',
   },
   name: {
-    width: "25%",
+    width: '25%',
   },
   sex: {
-    width: "5%",
+    width: '5%',
   },
   birthday: {
-    width: "25%",
+    width: '25%',
   },
   userButtons: {
     // width: "10%",

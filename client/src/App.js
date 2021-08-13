@@ -1,29 +1,33 @@
-import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
-import "./App.css";
-import axios from "axios";
-import Users from "./components/Users/Users.jsx";
-import CreateUser from "./Pages/CreateUser/CreateUser";
-import userExample from "./Data/userExample";
-import NavBar from "./components/NavBar/NavBar";
-import birthdayStringToDate from "./components/util/functions/birthdayStringToDate";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import './App.css';
+import axios from 'axios';
+import { ThemeProvider } from '@material-ui/styles';
+import Users from './components/Users/Users.jsx';
+import CreateUser from './Pages/CreateUser/CreateUser';
+import userExample from './Data/userExample';
+import NavBar from './components/NavBar/NavBar';
+import birthdayStringToDate from './components/util/functions/birthdayStringToDate';
 
 import Theme from './Themes/Theme';
-import useStyles from "./Styles";
-import { ThemeProvider } from "@material-ui/styles";
+import useStyles from './Styles';
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: 'http://localhost:5000/',
 });
-
 
 function App() {
   const [userData, setUserData] = useState([]);
   const [visibleUserData, setVisibleUserData] = useState([]);
   const [sexFilter, setSexFilter] = useState([]);
   const [currentSort, setCurrentSort] = useState({
-    property: "_id",
-    order: "ascending",
+    property: '_id',
+    order: 'ascending',
   });
 
   const classes = useStyles();
@@ -31,13 +35,13 @@ function App() {
 
   const fetchUserData = async () => {
     await api
-      .get("/getUserData", {
+      .get('/getUserData', {
         headers: {
-          "Access-Control-Allow-Origin": "*",
+          'Access-Control-Allow-Origin': '*',
         },
       })
       .then((response) => {
-        const data = Object.values(response.data)
+        const data = Object.values(response.data);
         setUserData(data);
       });
   };
@@ -68,13 +72,13 @@ function App() {
   const sortByBirthday = (users, order) => {
     const filteredUsers = [...userData];
 
-    if (order === "descending") {
+    if (order === 'descending') {
       filteredUsers.sort((a, b) =>
         birthdayStringToDate(a.birthday) > birthdayStringToDate(b.birthday)
           ? 1
           : -1
       );
-    } else if (order === "ascending") {
+    } else if (order === 'ascending') {
       filteredUsers.sort((a, b) =>
         birthdayStringToDate(a.birthday) < birthdayStringToDate(b.birthday)
           ? 1
@@ -88,12 +92,16 @@ function App() {
   const sortUsers = (users, order, list) => {
     const filteredUsers = users;
 
-    if (order === "descending") {
-      filteredUsers.sort((a, b) => (a[list].toLowerCase() > b[list].toLowerCase() ? 1 : -1));
+    if (order === 'descending') {
+      filteredUsers.sort((a, b) =>
+        a[list].toLowerCase() > b[list].toLowerCase() ? 1 : -1
+      );
     }
 
-    if (order === "ascending") {
-      filteredUsers.sort((a, b) => (a[list].toLowerCase() < b[list].toLowerCase() ? 1 : -1));
+    if (order === 'ascending') {
+      filteredUsers.sort((a, b) =>
+        a[list].toLowerCase() < b[list].toLowerCase() ? 1 : -1
+      );
     }
 
     return filteredUsers;
@@ -102,7 +110,7 @@ function App() {
   const handleSortUsers = (order, list) => {
     let sortedUsers = [...userData];
 
-    if (list === "birthday") {
+    if (list === 'birthday') {
       sortedUsers = sortByBirthday(sortedUsers, order);
     } else {
       sortedUsers = sortUsers(sortedUsers, order, list);
@@ -118,13 +126,13 @@ function App() {
   };
 
   const createUser = (newUser) => {
-    setUserData([...userData, newUser])
+    setUserData([...userData, newUser]);
 
-     api.post("/createNewUser", { newUser }).then((response) => {
+    api.post('/createNewUser', { newUser }).then((response) => {
       console.log(response);
       history.push('/');
-    })
-  }
+    });
+  };
 
   const removeUser = (userId) => {
     const newUsers = userData.filter((user) => user._id !== userId);
@@ -139,38 +147,38 @@ function App() {
     newUsers.splice(userIndex, 1, editedUser);
 
     setUserData(newUsers);
-    api.post("/editUser", {editedUser});
+    api.post('/editUser', { editedUser });
   };
 
   useEffect(() => {
     handleSortUsers(currentSort.order, currentSort.property);
   }, [userData, sexFilter]);
 
-  useEffect( () => {
+  useEffect(() => {
     fetchUserData();
-  }, [])
+  }, []);
 
   return (
     <ThemeProvider theme={Theme}>
       <div className="App">
-      <NavBar />
-      <Switch>
-        <div className={classes.appMain}>
-          <Route exact path="/">
-            <Users
-              sortUsers={handleSortUsers}
-              handleSexFilter={changeSexFilter}
-              userData={visibleUserData}
-              removeUser={removeUser}
-              submitEditedUser={editUser}
-            />
-          </Route>
-          <Route path="/create-user">
-            <CreateUser submitUser={createUser} />
-          </Route>
-        </div>
-      </Switch>
-    </div>
+        <NavBar />
+        <Switch>
+          <div className={classes.appMain}>
+            <Route exact path="/">
+              <Users
+                sortUsers={handleSortUsers}
+                handleSexFilter={changeSexFilter}
+                userData={visibleUserData}
+                removeUser={removeUser}
+                submitEditedUser={editUser}
+              />
+            </Route>
+            <Route path="/create-user">
+              <CreateUser submitUser={createUser} />
+            </Route>
+          </div>
+        </Switch>
+      </div>
     </ThemeProvider>
   );
 }

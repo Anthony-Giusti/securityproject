@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Checkbox,
   FormControl,
@@ -7,8 +8,8 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-} from "@material-ui/core";
-import React from "react";
+} from '@material-ui/core';
+import React from 'react';
 
 const UsersHeaderTools = ({ handleSexFilter }) => {
   const handleChange = (e) => {
