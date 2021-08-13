@@ -8,20 +8,24 @@ export default makeStyles({
   userInfo: {
     display: 'flex',
     width: '90%',
+    padding: '16px 0',
   },
-  id: {
-    width: '20%',
-  },
+  // id: {
+  //   width: '20%',
+  // },
   name: {
-    width: '25%',
+    width: '35%',
   },
   sex: {
-    width: '5%',
+    width: '10%',
   },
   birthday: {
-    width: '25%',
+    width: '20%',
   },
   userButtons: {
-    // width: "10%",
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    width: '10%',
+    padding: 0,
   },
 });
