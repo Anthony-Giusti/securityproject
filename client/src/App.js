@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import { ThemeProvider } from '@material-ui/styles';
-import Users from './components/Users/Users.jsx';
+import Users from './Pages/Users/Users.jsx';
 import CreateUser from './Pages/CreateUser/CreateUser';
 import userExample from './Data/userExample';
 import NavBar from './components/NavBar/NavBar';
@@ -16,6 +16,7 @@ import birthdayStringToDate from './components/util/functions/birthdayStringToDa
 
 import Theme from './Themes/Theme';
 import useStyles from './Styles';
+import createDateAndTimeString from './components/util/functions/createDateAndTimeString';
 
 const api = axios.create({
   baseURL: 'http://localhost:5000/',
@@ -125,13 +126,12 @@ function App() {
     }
   };
 
-  const createUser = (newUser) => {
-    setUserData([...userData, newUser]);
-
-    api.post('/createNewUser', { newUser }).then((response) => {
+  const createUser = async (newUser) => {
+    await api.post('/createNewUser', { newUser }).then((response) => {
       console.log(response);
-      history.push('/');
     });
+
+    history.push('/');
   };
 
   const removeUser = (userId) => {
@@ -142,6 +142,7 @@ function App() {
   };
 
   const editUser = (editedUser) => {
+    editedUser.lastEdit = createDateAndTimeString();
     const newUsers = [...userData];
     const userIndex = userData.findIndex((user) => user._id === editedUser._id);
     newUsers.splice(userIndex, 1, editedUser);
@@ -153,10 +154,6 @@ function App() {
   useEffect(() => {
     handleSortUsers(currentSort.order, currentSort.property);
   }, [userData, sexFilter]);
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
 
   return (
     <ThemeProvider theme={Theme}>
@@ -171,6 +168,7 @@ function App() {
                 userData={visibleUserData}
                 removeUser={removeUser}
                 submitEditedUser={editUser}
+                fetchUserData={fetchUserData}
               />
             </Route>
             <Route path="/create-user">
