@@ -7,9 +7,10 @@ import AddIcon from '@material-ui/icons/Add';
 import useStyles from './Styles';
 
 const NavBar = () => {
-  const x = 'beep';
   const history = useHistory();
   const classes = useStyles();
+
+  console.log(history.location.pathname);
 
   return (
     <AppBar className={classes.navBarMain}>
@@ -18,6 +19,7 @@ const NavBar = () => {
           variant="contained"
           endIcon={<ListIcon />}
           onClick={() => history.push('/')}
+          color={history.location.pathname === '/' ? 'secondary' : 'default'}
         >
           <Typography>Users</Typography>
         </Button>
@@ -25,6 +27,11 @@ const NavBar = () => {
           variant="contained"
           endIcon={<AddIcon />}
           onClick={() => history.push('/create-user')}
+          color={
+            history.location.pathname === '/create-user'
+              ? 'secondary'
+              : 'default'
+          }
         >
           <Typography>Create New User</Typography>
         </Button>

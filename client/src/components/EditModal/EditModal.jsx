@@ -150,6 +150,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
 
           <div className={classes.userFields}>
             <TextField
+              className={classes.userField}
               variant="outlined"
               error={firstNameError}
               onChange={editMade}
@@ -162,6 +163,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
             />
 
             <TextField
+              className={classes.userField}
               variant="outlined"
               error={lastNameError}
               onChange={editMade}
@@ -173,21 +175,24 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
               }}
             />
 
-            <FormControl>
-              <InputLabel>Sex</InputLabel>
-              <Select
+            <FormControl className={classes.userField}>
+              {/* <InputLabel shrink>Sex</InputLabel> */}
+              <TextField
+                label="Sex"
                 variant="outlined"
                 onChange={userSexChange}
                 defaultValue={userSex}
+                select
               >
                 <MenuItem value={1}>M</MenuItem>
                 <MenuItem value={2}>F</MenuItem>
                 <MenuItem value={3}>NB</MenuItem>
-              </Select>
+              </TextField>
             </FormControl>
 
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <BirthdayPicker
+                className={classes.userField}
                 userBirthday={userBirthday}
                 userBirthdayChange={userBirthdayChange}
               />
