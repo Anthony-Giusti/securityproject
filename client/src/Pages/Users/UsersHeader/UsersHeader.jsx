@@ -8,9 +8,7 @@ import {
 import React, { useState } from 'react';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-import { useTheme } from '@material-ui/styles';
 import UsersHeaderTools from './UsersHeaderTools/UsersHeaderTools';
 
 import useStyles from './Styles';
@@ -36,7 +34,7 @@ const UsersHeader = ({ handleSexFilter, sortUsers }) => {
       <div className={classes.usersHeader}>
         <span className={classes.usersDivders}>
           <div className={classes.name}>
-            <Typography>First Name</Typography>
+            <Typography className={classes.columnName}>First Name</Typography>
             <SortButton
               handleSort={handleSort}
               toBeSorted="firstName"
@@ -47,7 +45,7 @@ const UsersHeader = ({ handleSexFilter, sortUsers }) => {
           <Divider orientation="vertical" flexItem />
 
           <div className={classes.name}>
-            <Typography>Last Name</Typography>
+            <Typography className={classes.columnName}>Last Name</Typography>
             <SortButton
               handleSort={handleSort}
               toBeSorted="lastName"
@@ -58,13 +56,13 @@ const UsersHeader = ({ handleSexFilter, sortUsers }) => {
           <Divider orientation="vertical" flexItem />
 
           <div className={classes.sex}>
-            <Typography>Sex</Typography>
+            <Typography className={classes.columnName}>Sex</Typography>
           </div>
 
-          <Divider orientation="vertical" flexItem />
+          <Divider light orientation="vertical" flexItem />
 
           <div className={classes.birthday}>
-            <Typography>Birthday</Typography>
+            <Typography className={classes.columnName}>Birthday</Typography>
             <SortButton
               handleSort={handleSort}
               toBeSorted="birthday"
@@ -75,8 +73,12 @@ const UsersHeader = ({ handleSexFilter, sortUsers }) => {
 
         <Divider orientation="vertical" flexItem />
 
-        <span className={classes.dropDownBtn}>
-          <IconButton size="small" onClick={handleExpandHeader}>
+        <span className={classes.dropDownBtnContainer}>
+          <IconButton
+            className={classes.dropDownBtn}
+            size="small"
+            onClick={handleExpandHeader}
+          >
             {expandedHeader ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </IconButton>
         </span>

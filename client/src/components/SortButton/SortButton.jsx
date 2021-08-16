@@ -2,10 +2,14 @@
 import React, { useState } from 'react';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import { Button, Divider, IconButton, Typography } from '@material-ui/core';
+import useStyles from './styles';
 
 const SortButton = ({ handleSort, toBeSorted, selectedSortBtn }) => {
   const [currentDirection, setCurrentDirection] = useState('descending');
+  const classes = useStyles();
 
   const handleClick = (direction) => {
     handleSort(direction, toBeSorted);
@@ -21,18 +25,26 @@ const SortButton = ({ handleSort, toBeSorted, selectedSortBtn }) => {
     <>
       {currentDirection === 'ascending' && (
         <IconButton
-          color={selectedSortBtn === toBeSorted ? 'secondary' : 'default'}
+          className={
+            selectedSortBtn === toBeSorted
+              ? classes.btnActive
+              : classes.btnPassive
+          }
           onClick={() => handleClick('ascending')}
         >
-          <ExpandLessIcon id={toBeSorted} />
+          <ArrowUpwardIcon id={toBeSorted} />
         </IconButton>
       )}
       {currentDirection === 'descending' && (
         <IconButton
-          color={selectedSortBtn === toBeSorted ? 'secondary' : 'primary'}
+          className={
+            selectedSortBtn === toBeSorted
+              ? classes.btnActive
+              : classes.btnPassive
+          }
           onClick={() => handleClick('descending')}
         >
-          <ExpandMoreIcon id={toBeSorted} />
+          <ArrowDownwardIcon id={toBeSorted} />
         </IconButton>
       )}
     </>
