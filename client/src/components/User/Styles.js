@@ -4,15 +4,13 @@ export default makeStyles({
   userMain: {
     display: 'flex',
     width: '100%',
+    margin: '0.2em 0',
   },
   userInfo: {
     display: 'flex',
     width: '90%',
     padding: '16px 0',
   },
-  // id: {
-  //   width: '20%',
-  // },
   name: {
     width: '35%',
   },
