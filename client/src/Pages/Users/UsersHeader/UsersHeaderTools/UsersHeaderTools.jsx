@@ -12,12 +12,23 @@ import {
 import React from 'react';
 import useStyles from './Styles';
 import Theme from '../../../../Themes/Theme';
+import getAverageInt from '../../../../components/util/functions/getAverageInt';
 
-const UsersHeaderTools = ({ handleSexFilter }) => {
+const UsersHeaderTools = ({ handleSexFilter, userData }) => {
   const handleChange = (e) => {
     console.log(e.target.value);
     handleSexFilter(e.target.value);
   };
+
+  const handleGetAverage = () => {
+    const now = new Date();
+
+    // userAges = usersData.forEach((user) => {
+
+    // })
+
+    // return getAverageInt();
+  }
 
   const classes = useStyles();
 
@@ -48,6 +59,9 @@ const UsersHeaderTools = ({ handleSexFilter }) => {
           </FormGroup>
         </FormControl>
       </div>
+      {/* <div className={classes.toolsSection}>
+        Beep
+      </div> */}
     </div>
   );
 };

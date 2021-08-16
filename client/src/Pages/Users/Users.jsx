@@ -62,7 +62,11 @@ const Users = ({
 
   return (
     <div className={classes.usersMain}>
-      <UsersHeader handleSexFilter={handleSexFilter} sortUsers={sortUsers} />
+      <UsersHeader
+        handleSexFilter={handleSexFilter}
+        sortUsers={sortUsers}
+        userData={userData}
+      />
       {userData.map((user) => (
         <User
           key={user._id}
