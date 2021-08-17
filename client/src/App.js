@@ -1,22 +1,23 @@
+import { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   useHistory,
 } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import './App.css';
+
 import axios from 'axios';
 import { ThemeProvider } from '@material-ui/styles';
+
 import Users from './Pages/Users/Users.jsx';
 import CreateUser from './Pages/CreateUser/CreateUser';
 import userExample from './Data/userExample';
 import NavBar from './components/NavBar/NavBar';
-import birthdayStringToDate from './components/util/functions/birthdayStringToDate';
+import createDateAndTimeString from './components/util/functions/createDateAndTimeString';
 
+import './App.css';
 import Theme from './Themes/Theme';
 import useStyles from './Styles';
-import createDateAndTimeString from './components/util/functions/createDateAndTimeString';
 
 const api = axios.create({
   baseURL: 'http://localhost:5000/',
