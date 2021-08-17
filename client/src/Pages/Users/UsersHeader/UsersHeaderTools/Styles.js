@@ -3,7 +3,9 @@ import { grey } from '@material-ui/core/colors';
 
 export default makeStyles((theme) => ({
   toolsMain: {
-    display: 'flex',
+    display: 'grid',
+    gridGap: 10,
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 300px))',
     padding: '1em',
     borderTop: '1px solid white',
   },
