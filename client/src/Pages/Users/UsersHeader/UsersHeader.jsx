@@ -14,7 +14,7 @@ import UsersHeaderTools from './UsersHeaderTools/UsersHeaderTools';
 import useStyles from './Styles';
 import SortButton from '../../../components/SortButton/SortButton';
 
-const UsersHeader = ({ handleSexFilter, sortUsers, userData }) => {
+const UsersHeader = ({ handleSexFilter, sortUsers, userData, sexFilter }) => {
   const [expandedHeader, setExpandedHeader] = useState(false);
   const [selectedSortBtn, setSelectedSortBtn] = useState('_id');
   const classes = useStyles();
@@ -83,7 +83,13 @@ const UsersHeader = ({ handleSexFilter, sortUsers, userData }) => {
           </IconButton>
         </span>
       </div>
-      {expandedHeader && <UsersHeaderTools handleSexFilter={handleSexFilter} userData={userData} />}
+      {expandedHeader && (
+        <UsersHeaderTools
+          handleSexFilter={handleSexFilter}
+          userData={userData}
+          sexFilter={sexFilter}
+        />
+      )}
     </div>
   );
 };

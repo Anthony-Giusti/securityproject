@@ -8,27 +8,32 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  Typography,
 } from '@material-ui/core';
 import React from 'react';
 import useStyles from './Styles';
 import Theme from '../../../../Themes/Theme';
 import getAverageInt from '../../../../components/util/functions/getAverageInt';
+import brithdayStringToDate from '../../../../components/util/functions/birthdayStringToDate';
 
-const UsersHeaderTools = ({ handleSexFilter, userData }) => {
+const UsersHeaderTools = ({ handleSexFilter, sexFilter, userData }) => {
   const handleChange = (e) => {
-    console.log(e.target.value);
     handleSexFilter(e.target.value);
   };
 
   const handleGetAverage = () => {
     const now = new Date();
 
-    // userAges = usersData.forEach((user) => {
+    const birthdaysInDays = userData.map((user) => {
+      const diffTime = Math.abs(now - brithdayStringToDate(user.birthday));
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    // })
+      return diffDays;
+    });
 
-    // return getAverageInt();
-  }
+    const sum = birthdaysInDays.reduce((a, b) => a + b, 0);
+    return Math.round(sum / birthdaysInDays.length / 365);
+  };
 
   const classes = useStyles();
 
@@ -43,25 +48,29 @@ const UsersHeaderTools = ({ handleSexFilter, userData }) => {
               control={<Checkbox name="male" />}
               value="M"
               label="Male"
+              checked={sexFilter.includes('M')}
             />
             <FormControlLabel
               control={<Checkbox name="female" />}
               onChange={handleChange}
               value="F"
               label="Female"
+              checked={sexFilter.includes('F')}
             />
             <FormControlLabel
               control={<Checkbox name="non-binary" />}
               onChange={handleChange}
               value="NB"
               label="Non-Binary"
+              checked={sexFilter.includes('NB')}
             />
           </FormGroup>
         </FormControl>
       </div>
-      {/* <div className={classes.toolsSection}>
-        Beep
-      </div> */}
+      <div className={classes.toolsSection}>
+        <Typography>Average User Age:</Typography>
+        <Typography>{handleGetAverage()}</Typography>
+      </div>
     </div>
   );
 };
