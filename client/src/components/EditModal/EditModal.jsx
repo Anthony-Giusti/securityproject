@@ -117,13 +117,15 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
 
   return (
     <>
-      <Dialog open={editModalOpen} onClose={handleModalClose}>
-        <DialogTitle className={classes.title}>
-          <Typography variant="h2">Edit User</Typography>
-          <Typography gutterBottom variant="caption">
+      <Dialog open={editModalOpen} onClose={handleModalClose} fullWidth>
+        <div className={classes.title}>
+          <DialogTitle>
+            <Typography variant="h2">Edit User</Typography>
+          </DialogTitle>
+          <Typography className={classes.userId} gutterBottom variant="caption">
             ID: {selectedUser._id}
           </Typography>
-        </DialogTitle>
+        </div>
 
         <DialogContent>
           <div>
@@ -176,7 +178,6 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
             />
 
             <FormControl className={classes.userField}>
-              {/* <InputLabel shrink>Sex</InputLabel> */}
               <TextField
                 label="Sex"
                 variant="outlined"

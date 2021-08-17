@@ -24,12 +24,6 @@ const api = axios.create({
 
 function App() {
   const [userData, setUserData] = useState([]);
-  const [visibleUserData, setVisibleUserData] = useState([]);
-  const [sexFilter, setSexFilter] = useState([]);
-  const [currentSort, setCurrentSort] = useState({
-    property: '_id',
-    order: 'ascending',
-  });
 
   const classes = useStyles();
   const history = useHistory();
@@ -45,85 +39,6 @@ function App() {
         const data = Object.values(response.data);
         setUserData(data);
       });
-  };
-
-  const filterUsers = (users) => {
-    const filteredUsers = [];
-
-    users.forEach((user) => {
-      for (let x = 0; x < sexFilter.length; x += 1) {
-        if (user.sex === sexFilter[x]) {
-          filteredUsers.push(user);
-          break;
-        }
-      }
-    });
-
-    return filteredUsers;
-  };
-
-  const changeSexFilter = (newSex) => {
-    if (sexFilter.includes(newSex)) {
-      setSexFilter((prev) => prev.filter((sex) => sex !== newSex));
-    } else {
-      setSexFilter((prev) => [...prev, newSex]);
-    }
-  };
-
-  const sortByBirthday = (users, order) => {
-    const filteredUsers = [...userData];
-
-    if (order === 'descending') {
-      filteredUsers.sort((a, b) =>
-        birthdayStringToDate(a.birthday) > birthdayStringToDate(b.birthday)
-          ? 1
-          : -1
-      );
-    } else if (order === 'ascending') {
-      filteredUsers.sort((a, b) =>
-        birthdayStringToDate(a.birthday) < birthdayStringToDate(b.birthday)
-          ? 1
-          : -1
-      );
-    }
-
-    return filteredUsers;
-  };
-
-  const sortUsers = (users, order, list) => {
-    const filteredUsers = users;
-
-    if (order === 'descending') {
-      filteredUsers.sort((a, b) =>
-        a[list].toLowerCase() > b[list].toLowerCase() ? 1 : -1
-      );
-    }
-
-    if (order === 'ascending') {
-      filteredUsers.sort((a, b) =>
-        a[list].toLowerCase() < b[list].toLowerCase() ? 1 : -1
-      );
-    }
-
-    return filteredUsers;
-  };
-
-  const handleSortUsers = (order, list) => {
-    let sortedUsers = [...userData];
-
-    if (list === 'birthday') {
-      sortedUsers = sortByBirthday(sortedUsers, order);
-    } else {
-      sortedUsers = sortUsers(sortedUsers, order, list);
-    }
-
-    setCurrentSort({ property: list, order });
-
-    if (sexFilter.length > 0) {
-      setVisibleUserData(filterUsers(sortedUsers));
-    } else {
-      setVisibleUserData(sortedUsers);
-    }
   };
 
   const createUser = async (newUser) => {
@@ -151,10 +66,6 @@ function App() {
     api.post('/editUser', { editedUser });
   };
 
-  useEffect(() => {
-    handleSortUsers(currentSort.order, currentSort.property);
-  }, [userData, sexFilter]);
-
   return (
     <ThemeProvider theme={Theme}>
       <div className="App">
@@ -163,9 +74,7 @@ function App() {
           <div className={classes.appMain}>
             <Route exact path="/">
               <Users
-                sortUsers={handleSortUsers}
-                handleSexFilter={changeSexFilter}
-                userData={visibleUserData}
+                userData={userData}
                 removeUser={removeUser}
                 submitEditedUser={editUser}
                 fetchUserData={fetchUserData}
