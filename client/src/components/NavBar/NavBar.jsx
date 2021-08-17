@@ -1,23 +1,28 @@
 import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useEffect, useState } from 'react';
 import ListIcon from '@material-ui/icons/List';
 import AddIcon from '@material-ui/icons/Add';
+import { useTheme } from '@material-ui/styles';
 
 import useStyles from './Styles';
 
 const NavBar = () => {
   const history = useHistory();
   const classes = useStyles();
+  const theme = useTheme();
+  const mdDevice = useMediaQuery(theme.breakpoints.up('sm'));
 
-  console.log(history.location.pathname);
+  console.log(mdDevice);
 
   return (
     <AppBar className={classes.navBarMain}>
-      <Toolbar>
+      <Toolbar className={classes.toolbar}>
         <Button
+          className={classes.toolbarBtn}
           variant="contained"
-          endIcon={<ListIcon />}
+          endIcon={!mdDevice ? null : <ListIcon />}
           onClick={() => history.push('/')}
           color={history.location.pathname === '/' ? 'secondary' : 'default'}
         >
@@ -25,7 +30,7 @@ const NavBar = () => {
         </Button>
         <Button
           variant="contained"
-          endIcon={<AddIcon />}
+          endIcon={!mdDevice ? null : <AddIcon />}
           onClick={() => history.push('/create-user')}
           color={
             history.location.pathname === '/create-user'
