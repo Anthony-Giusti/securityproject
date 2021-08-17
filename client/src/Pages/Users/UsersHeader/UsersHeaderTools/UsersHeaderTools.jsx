@@ -13,7 +13,6 @@ import {
 import React from 'react';
 import useStyles from './Styles';
 import Theme from '../../../../Themes/Theme';
-import getAverageInt from '../../../../components/util/functions/getAverageInt';
 import brithdayStringToDate from '../../../../components/util/functions/birthdayStringToDate';
 
 const UsersHeaderTools = ({ handleSexFilter, sexFilter, userData }) => {
