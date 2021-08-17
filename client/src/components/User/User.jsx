@@ -1,16 +1,15 @@
-/* eslint-disable react/prop-types */
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Menu,
-  MenuItem,
-  Typography,
-  useMediaQuery,
-} from '@material-ui/core';
-import Divider from '@material-ui/core/Divider';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Divider from '@material-ui/core/Divider';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -20,7 +19,6 @@ import { useTheme } from '@material-ui/styles';
 import useStyles from './Styles';
 
 const User = ({ user, openEditModal, handleRemoveUser }) => {
-  const [expandedMenuOpen, setExpanededMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const classes = useStyles();
@@ -40,25 +38,25 @@ const User = ({ user, openEditModal, handleRemoveUser }) => {
   return (
     <Card elevation={1} className={classes.userMain}>
       <CardContent className={classes.userInfo}>
-        <span className={classes.name}>
-          <Typography>{user.firstName}</Typography>
+        <span className={`${classes.infoCell} ${classes.name}`}>
+          <Typography className={classes.userText}>{user.firstName}</Typography>
         </span>
 
         <Divider orientation="vertical" flexItem />
 
-        <span className={classes.name}>
+        <span className={`${classes.infoCell} ${classes.name}`}>
           <Typography>{user.lastName}</Typography>
         </span>
 
         <Divider orientation="vertical" flexItem />
 
-        <span className={classes.sex}>
+        <span className={`${classes.infoCell} ${classes.sex}`}>
           <Typography>{user.sex}</Typography>
         </span>
 
         <Divider orientation="vertical" flexItem />
 
-        <span className={classes.birthday}>
+        <span className={`${classes.infoCell} ${classes.birthday}`}>
           <Typography>{user.birthday}</Typography>
         </span>
       </CardContent>
@@ -110,6 +108,12 @@ const User = ({ user, openEditModal, handleRemoveUser }) => {
       </CardActions>
     </Card>
   );
+};
+
+User.propTypes = {
+  user: PropTypes.object,
+  openEditModal: PropTypes.func,
+  handleRemoveUser: PropTypes.func,
 };
 
 export default User;
