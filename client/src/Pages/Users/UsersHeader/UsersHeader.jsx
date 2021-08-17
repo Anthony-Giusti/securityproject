@@ -1,11 +1,7 @@
-/* eslint-disable react/prop-types */
-import {
-  Divider,
-  IconButton,
-  Typography,
-  useMediaQuery,
-} from '@material-ui/core';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import { Divider, IconButton, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
@@ -92,6 +88,13 @@ const UsersHeader = ({ handleSexFilter, sortUsers, userData, sexFilter }) => {
       )}
     </div>
   );
+};
+
+UsersHeader.propTypes = {
+  handleSexFilter: PropTypes.func,
+  sortUsers: PropTypes.func,
+  userData: PropTypes.array,
+  sexFilter: PropTypes.array,
 };
 
 export default UsersHeader;

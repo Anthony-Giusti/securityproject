@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Button,
@@ -9,9 +9,7 @@ import {
   DialogTitle,
   Divider,
   FormControl,
-  InputLabel,
   MenuItem,
-  Select,
   TextField,
   Typography,
 } from '@material-ui/core';
@@ -119,10 +117,8 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
     <>
       <Dialog open={editModalOpen} onClose={handleModalClose} fullWidth>
         <div className={classes.title}>
-          <DialogTitle>
-            <Typography variant="h2">Edit User</Typography>
-          </DialogTitle>
-          <Typography className={classes.userId} gutterBottom variant="caption">
+          <Typography variant="h2">Edit User</Typography>
+          <Typography gutterBottom variant="caption">
             ID: {selectedUser._id}
           </Typography>
         </div>
@@ -182,7 +178,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
                 label="Sex"
                 variant="outlined"
                 onChange={userSexChange}
-                defaultValue={userSex}
+                value={userSex}
                 select
               >
                 <MenuItem value={1}>M</MenuItem>
@@ -224,27 +220,35 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
       <Dialog open={editModalConfirmOpen}>
         <DialogContent>
           <Typography>Confirm edits before closing?</Typography>
-          <Button
-            variant="contained"
-            startIcon={<CheckIcon />}
-            color="primary"
-            onClick={confrimEdits}
-          >
-            Confirm Edits
-          </Button>
-          <Button
-            variant="contained"
-            startIcon={<DeleteIcon />}
-            color="secondary"
-            onClick={discardEdits}
-          >
-            Discard Edits
-          </Button>
-          <Button onClick={cancelEdits}>Cancel</Button>
+          <DialogActions>
+            <Button
+              variant="contained"
+              startIcon={<CheckIcon />}
+              color="primary"
+              onClick={confrimEdits}
+            >
+              Confirm Edits
+            </Button>
+            <Button
+              variant="contained"
+              startIcon={<DeleteIcon />}
+              color="secondary"
+              onClick={discardEdits}
+            >
+              Discard Edits
+            </Button>
+            <Button onClick={cancelEdits}>Cancel</Button>
+          </DialogActions>
         </DialogContent>
       </Dialog>
     </>
   );
+};
+
+EditModal.propTypes = {
+  editModalOpen: PropTypes.bool,
+  closeEditModal: PropTypes.func,
+  selectedUser: PropTypes.object,
 };
 
 export default EditModal;

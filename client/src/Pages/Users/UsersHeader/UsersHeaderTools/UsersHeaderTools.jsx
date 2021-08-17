@@ -1,4 +1,6 @@
-/* eslint-disable react/prop-types */
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Checkbox,
   FormControl,
@@ -10,7 +12,7 @@ import {
   RadioGroup,
   Typography,
 } from '@material-ui/core';
-import React from 'react';
+
 import useStyles from './Styles';
 import Theme from '../../../../Themes/Theme';
 import brithdayStringToDate from '../../../../components/util/functions/birthdayStringToDate';
@@ -72,6 +74,12 @@ const UsersHeaderTools = ({ handleSexFilter, sexFilter, userData }) => {
       </div>
     </div>
   );
+};
+
+UsersHeaderTools.propTypes = {
+  handleSexFilter: PropTypes.func,
+  sexFilter: PropTypes.array,
+  userData: PropTypes.array,
 };
 
 export default UsersHeaderTools;

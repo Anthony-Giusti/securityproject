@@ -1,5 +1,6 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Button,
   FormControl,
@@ -9,7 +10,6 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import isAlpha from 'validator/es/lib/isAlpha';
@@ -129,6 +129,10 @@ const CreateUser = ({ submitUser }) => {
       </Button>
     </div>
   );
+};
+
+CreateUser.propTypes = {
+  submitUser: PropTypes.func,
 };
 
 export default CreateUser;

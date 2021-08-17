@@ -1,10 +1,12 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import { Button, Divider, IconButton, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import { Button, Divider, IconButton, Typography } from '@material-ui/core';
+
 import useStyles from './styles';
 
 const SortButton = ({ handleSort, toBeSorted, selectedSortBtn }) => {
@@ -49,6 +51,12 @@ const SortButton = ({ handleSort, toBeSorted, selectedSortBtn }) => {
       )}
     </>
   );
+};
+
+SortButton.propTypes = {
+  handleSort: PropTypes.func,
+  toBeSorted: PropTypes.string,
+  selectedSortBtn: PropTypes.string,
 };
 
 export default SortButton;

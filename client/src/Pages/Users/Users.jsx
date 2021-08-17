@@ -1,18 +1,10 @@
-/* eslint-disable react/prop-types */
-import {
-  Button,
-  Card,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  TextField,
-  Typography,
-} from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+
+import { Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import 'date-fns';
 
-import DeleteIcon from '@material-ui/icons/Delete';
 import useStyles from './Styles';
 import User from '../../components/User/User';
 import EditModal from '../../components/EditModal/EditModal';
@@ -191,6 +183,13 @@ const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
       )}
     </div>
   );
+};
+
+Users.propTypes = {
+  userData: PropTypes.object,
+  removeUser: PropTypes.func,
+  submitEditedUser: PropTypes.func,
+  fetchUserData: PropTypes.func,
 };
 
 export default Users;
