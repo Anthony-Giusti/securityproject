@@ -2,9 +2,15 @@ import { makeStyles, requirePropFactory } from '@material-ui/core';
 import grey from '@material-ui/core/colors/grey';
 
 export default makeStyles((theme) => ({
+  modalMain: {
+    width: '60%',
+  },
   title: {
     display: 'flex',
     flexDirection: 'column',
+  },
+  userId: {
+    padding: '0 24px',
   },
   dateBox: {
     display: 'flex',
@@ -22,14 +28,7 @@ export default makeStyles((theme) => ({
   userFields: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-    // gridAutoColumns: 'min-content',
-    // gridAutoFlow: 'column',
-    gap: 10,
-    // gridAutoRows: 'minmax(50px, auto)',
-    flexWrap: 'wrap',
+    gridGap: 10,
     marginTop: '1.5em',
-  },
-  userField: {
-    // margin: '0.4em',
   },
 }));
