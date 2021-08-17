@@ -11,6 +11,11 @@ export default makeStyles({
     width: '90%',
     padding: '16px 0',
   },
+  infoCell: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   name: {
     width: '35%',
   },
@@ -25,5 +30,12 @@ export default makeStyles({
     justifyContent: 'space-evenly',
     width: '10%',
     padding: 0,
+  },
+  userText: {
+    display: '-webkit-box',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    '-webkitLineClamp': 2,
+    '-webkitBoxOrient': 'vertical',
   },
 });

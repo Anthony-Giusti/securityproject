@@ -8,6 +8,7 @@ export default makeStyles((theme) => ({
   title: {
     display: 'flex',
     flexDirection: 'column',
+    paddingLeft: 24,
   },
   userId: {
     padding: '0 24px',
