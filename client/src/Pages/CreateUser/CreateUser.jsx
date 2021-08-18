@@ -1,18 +1,15 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import isAlpha from 'validator/es/lib/isAlpha';
 import isBefore from 'validator/es/lib/isBefore';
 import useStyles from './styles';
 
@@ -20,6 +17,8 @@ import BirthdayPicker from '../../components/BirthdayPicker/BirthdayPicker';
 import brithdayDateToString from '../../components/util/functions/birthdayDateToString';
 import sexIntToString from '../../components/util/functions/sexIntToString';
 import createDateAndTimeString from '../../components/util/functions/createDateAndTimeString';
+import validateUserNames from '../../components/util/functions/validateUserNames';
+import UserForm from '../../components/UserForm/UserForm';
 
 const CreateUser = ({ submitUser }) => {
   const [firstNameError, setFirstNameError] = useState(false);
@@ -36,22 +35,23 @@ const CreateUser = ({ submitUser }) => {
   const handleSubmit = () => {
     let errorsFound = false;
 
-    if (!isAlpha(firstNameField.value)) {
+    const errors = validateUserNames({
+      firstName: firstNameField.value,
+      lastName: lastNameField.value,
+    });
+
+    if (errors.firstName) {
       setFirstNameError(true);
       errorsFound = true;
     } else {
       setFirstNameError(false);
     }
 
-    if (!isAlpha(lastNameField.value)) {
+    if (errors.lastName) {
       setLastNameError(true);
       errorsFound = true;
     } else {
       setLastNameError(false);
-    }
-
-    if (birthdayError) {
-      errorsFound = true;
     }
 
     if (!errorsFound) {
@@ -84,10 +84,19 @@ const CreateUser = ({ submitUser }) => {
     setUserSex(e.target.value);
   };
 
+  const submit = (user) => {
+    console.log(user);
+  }
+  const editMade = () => {
+    console.log(editMade);
+  }
+
   return (
     <div>
       <Typography>New User</Typography>
-      <form onSubmit={handleSubmit} className={classes.createUserForm}>
+      <div><UserForm user={null} editMade={null} submit={submit} /></div>
+      
+      {/* <form onSubmit={handleSubmit} className={classes.createUserForm}>
         <TextField
           error={firstNameError}
           label="First Name"
@@ -122,7 +131,7 @@ const CreateUser = ({ submitUser }) => {
             birthdayError={birthdayError}
           />
         </MuiPickersUtilsProvider>
-      </form>
+      </form> */}
 
       <Button variant="contained" color="primary" onClick={handleSubmit}>
         Submit New User

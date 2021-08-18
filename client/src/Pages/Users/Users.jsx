@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import DeleteIcon from '@material-ui/icons/Delete';
+
 import 'date-fns';
 
 import useStyles from './Styles';
@@ -27,6 +31,14 @@ const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
   const openEditModal = (user) => {
     setSelectedUser(user);
     setEditModalOpen(true);
+  };
+
+  const closeEditModal = (action, editedUser) => {
+    if (action === 'submit') {
+      submitEditedUser(editedUser);
+    }
+    setEditModalOpen(false);
+    setSelectedUser(null);
   };
 
   const handleSexFilter = (newSex) => {
@@ -106,14 +118,6 @@ const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
     } else {
       setVisibleUserData(sortedUsers);
     }
-  };
-
-  const closeEditModal = (action, editedUser) => {
-    if (action === 'submit') {
-      submitEditedUser(editedUser);
-    }
-    setEditModalOpen(false);
-    setSelectedUser(null);
   };
 
   const confirmRemoveUser = (user) => {

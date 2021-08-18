@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  FormControl,
-  MenuItem,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import Divider from '@material-ui/core/Divider';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import CheckIcon from '@material-ui/icons/Check';
 import DeleteIcon from '@material-ui/icons/Delete';
-
+import { useTheme } from '@material-ui/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 import DateFnsUtils from '@date-io/date-fns';
 import isAlpha from 'validator/es/lib/isAlpha';
 import useStyles from './styles';
@@ -28,6 +27,8 @@ import sexStringToInt from '../util/functions/sexStringToInt';
 import brithdayDateToString from '../util/functions/birthdayDateToString';
 import brithdayStringToDate from '../util/functions/birthdayStringToDate';
 import createDateAndTimeString from '../util/functions/createDateAndTimeString';
+import validateUserNames from '../util/functions/validateUserNames';
+import UserForm from '../UserForm/UserForm';
 
 const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
   const [isEdited, setIsEdited] = useState(false);
@@ -37,10 +38,16 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
     brithdayStringToDate(selectedUser.birthday)
   );
 
+  const ref = useRef();
+
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
 
   const classes = useStyles();
+  const theme = useTheme();
+  const lgDevice = useMediaQuery(theme.breakpoints.up('lg'));
+  const mdDevice = useMediaQuery(theme.breakpoints.up('md'));
+  const smDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
   let firstNameField;
   let lastNameField;
@@ -48,14 +55,19 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
   const confrimEdits = () => {
     let errorsFound = false;
 
-    if (!isAlpha(firstNameField.value)) {
+    const errors = validateUserNames({
+      firstName: firstNameField.value,
+      lastName: lastNameField.value,
+    });
+
+    if (errors.firstName) {
       setFirstNameError(true);
       errorsFound = true;
     } else {
       setFirstNameError(false);
     }
 
-    if (!isAlpha(lastNameField.value)) {
+    if (errors.lastName) {
       setLastNameError(true);
       errorsFound = true;
     } else {
@@ -113,6 +125,10 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
     editMade();
   };
 
+  const submit = (user) => {
+    console.log(user);
+  }
+
   return (
     <>
       <Dialog open={editModalOpen} onClose={handleModalClose} fullWidth>
@@ -146,7 +162,9 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
 
           <Divider />
 
-          <div className={classes.userFields}>
+          <UserForm ref={ref} submit={submit} user={selectedUser} editMade={editMade} />
+
+          {/* <div className={classes.userFields}>
             <TextField
               className={classes.userField}
               variant="outlined"
@@ -194,7 +212,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
                 userBirthdayChange={userBirthdayChange}
               />
             </MuiPickersUtilsProvider>
-          </div>
+          </div> */}
         </DialogContent>
 
         <DialogActions>
@@ -220,8 +238,12 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
       <Dialog open={editModalConfirmOpen}>
         <DialogContent>
           <Typography>Confirm edits before closing?</Typography>
-          <DialogActions>
+          <DialogActions
+            // disableSpacing={mdDevice ? false : true}
+            className={classes.confirmDialogBtnsContainer}
+          >
             <Button
+              className={classes.confirmDialogBtn}
               variant="contained"
               startIcon={<CheckIcon />}
               color="primary"
@@ -230,6 +252,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
               Confirm Edits
             </Button>
             <Button
+              className={classes.confirmDialogBtn}
               variant="contained"
               startIcon={<DeleteIcon />}
               color="secondary"
@@ -237,7 +260,9 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
             >
               Discard Edits
             </Button>
-            <Button onClick={cancelEdits}>Cancel</Button>
+            <Button className={classes.confirmDialogBtn} onClick={cancelEdits}>
+              Cancel
+            </Button>
           </DialogActions>
         </DialogContent>
       </Dialog>
