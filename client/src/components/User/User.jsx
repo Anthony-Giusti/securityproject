@@ -23,7 +23,6 @@ const User = ({ user, openEditModal, handleRemoveUser }) => {
 
   const classes = useStyles();
   const theme = useTheme();
-  const lgDevice = useMediaQuery(theme.breakpoints.up('lg'));
   const mdDevice = useMediaQuery(theme.breakpoints.up('md'));
   const smDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
