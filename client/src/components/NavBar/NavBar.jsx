@@ -14,15 +14,12 @@ import useStyles from './Styles';
 
 const NavBar = () => {
   const history = useHistory();
-  const [currentPage, setCurrentPage] = useState(history.location.pathname);
+  const location = useLocation();
   const classes = useStyles();
   const theme = useTheme();
   const mdDevice = useMediaQuery(theme.breakpoints.up('sm'));
 
-  console.log(mdDevice);
-
   const handlePageChange = (route) => {
-    setCurrentPage(route);
     history.push(route);
   };
 
@@ -34,7 +31,7 @@ const NavBar = () => {
           variant="contained"
           endIcon={!mdDevice ? null : <ListIcon />}
           onClick={() => handlePageChange('/')}
-          color={currentPage === '/' ? 'secondary' : 'default'}
+          color={location.pathname === '/' ? 'secondary' : 'default'}
         >
           <Typography>Users</Typography>
         </Button>
@@ -42,7 +39,7 @@ const NavBar = () => {
           variant="contained"
           endIcon={!mdDevice ? null : <AddIcon />}
           onClick={() => handlePageChange('/create-user')}
-          color={currentPage === '/create-user' ? 'secondary' : 'default'}
+          color={location.pathname === '/create-user' ? 'secondary' : 'default'}
         >
           <Typography>Create New User</Typography>
         </Button>
