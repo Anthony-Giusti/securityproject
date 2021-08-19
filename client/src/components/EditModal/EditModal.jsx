@@ -38,7 +38,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
     brithdayStringToDate(selectedUser.birthday)
   );
 
-  const ref = useRef();
+  const ref = useRef(null);
 
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
@@ -49,47 +49,47 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
   const mdDevice = useMediaQuery(theme.breakpoints.up('md'));
   const smDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
-  let firstNameField;
-  let lastNameField;
+  // let firstNameField;
+  // let lastNameField;
 
-  const confrimEdits = () => {
-    let errorsFound = false;
+  // const confrimEdits = () => {
+  //   let errorsFound = false;
 
-    const errors = validateUserNames({
-      firstName: firstNameField.value,
-      lastName: lastNameField.value,
-    });
+  //   const errors = validateUserNames({
+  //     firstName: firstNameField.value,
+  //     lastName: lastNameField.value,
+  //   });
 
-    if (errors.firstName) {
-      setFirstNameError(true);
-      errorsFound = true;
-    } else {
-      setFirstNameError(false);
-    }
+  //   if (errors.firstName) {
+  //     setFirstNameError(true);
+  //     errorsFound = true;
+  //   } else {
+  //     setFirstNameError(false);
+  //   }
 
-    if (errors.lastName) {
-      setLastNameError(true);
-      errorsFound = true;
-    } else {
-      setLastNameError(false);
-    }
+  //   if (errors.lastName) {
+  //     setLastNameError(true);
+  //     errorsFound = true;
+  //   } else {
+  //     setLastNameError(false);
+  //   }
 
-    if (!errorsFound) {
-      const editedUser = {
-        _id: selectedUser._id,
-        firstName: firstNameField.value,
-        lastName: lastNameField.value,
-        sex: sexIntToString(userSex),
-        birthday: brithdayDateToString(userBirthday),
-        created: selectedUser.created,
-        lastEdit: createDateAndTimeString(),
-      };
+  //   if (!errorsFound) {
+  //     const editedUser = {
+  //       _id: selectedUser._id,
+  //       firstName: firstNameField.value,
+  //       lastName: lastNameField.value,
+  //       sex: sexIntToString(userSex),
+  //       birthday: brithdayDateToString(userBirthday),
+  //       created: selectedUser.created,
+  //       lastEdit: createDateAndTimeString(),
+  //     };
 
-      setEditModalConfirmOpen(false);
-      setIsEdited(false);
-      closeEditModal('submit', editedUser);
-    }
-  };
+  //     setEditModalConfirmOpen(false);
+  //     setIsEdited(false);
+  //     closeEditModal('submit', editedUser);
+  //   }
+  // };
 
   const discardEdits = () => {
     setEditModalConfirmOpen(false);
@@ -115,18 +115,21 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
     }
   };
 
-  const userSexChange = (e) => {
-    setUserSex(e.target.value);
-    editMade();
-  };
+  // const userSexChange = (e) => {
+  //   setUserSex(e.target.value);
+  //   editMade();
+  // };
 
-  const userBirthdayChange = (newBirthday) => {
-    setUserBirthday(newBirthday);
-    editMade();
-  };
+  // const userBirthdayChange = (newBirthday) => {
+  //   setUserBirthday(newBirthday);
+  //   editMade();
+  // };
 
-  const submit = (user) => {
-    console.log(user);
+  const handleSubmit = (editedUser) => {
+    console.log(editedUser);
+    setEditModalConfirmOpen(false);
+    setIsEdited(false);
+    closeEditModal('submit', editedUser);
   }
 
   return (
@@ -162,7 +165,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
 
           <Divider />
 
-          <UserForm ref={ref} submit={submit} user={selectedUser} editMade={editMade} />
+          <UserForm submit={handleSubmit} user={selectedUser} editMade={editMade} ref={ref} />
 
           {/* <div className={classes.userFields}>
             <TextField
@@ -221,7 +224,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
             startIcon={<CheckIcon />}
             className={classes.negitiveBtn}
             color="primary"
-            onClick={confrimEdits}
+            onClick={() => ref.current.sendForm()}
             disabled={!isEdited}
           >
             Confirm Edits
@@ -247,7 +250,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
               variant="contained"
               startIcon={<CheckIcon />}
               color="primary"
-              onClick={confrimEdits}
+              onClick={() => ref.current.sendForm()}
             >
               Confirm Edits
             </Button>

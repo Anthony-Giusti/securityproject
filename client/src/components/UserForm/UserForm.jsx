@@ -9,7 +9,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { useState } from 'react';
+import { useState, forwardRef, useImperativeHandle } from 'react';
 import isAlpha from 'validator/es/lib/isAlpha';
 import BirthdayPicker from '../BirthdayPicker/BirthdayPicker';
 import brithdayDateToString from '../util/functions/birthdayDateToString';
@@ -19,12 +19,12 @@ import sexIntToString from '../util/functions/sexIntToString';
 import sexStringToInt from '../util/functions/sexStringToInt';
 import useStyles from './Styles';
 
-const UserForm = ({ user, editMade, submit }) => {
+const UserForm = forwardRef ((props, ref) => {
   const [userSex, setUserSex] = useState(
-    user ? sexStringToInt(user.sex) : 3
+    props.user ? sexStringToInt(props.user.sex) : 3
   );
   const [userBirthday, setUserBirthday] = useState(
-    user ? brithdayStringToDate(user.birthday) : new Date()
+    props.user ? brithdayStringToDate(props.user.birthday) : new Date()
   );
   const classes = useStyles();
 
@@ -34,14 +34,22 @@ const UserForm = ({ user, editMade, submit }) => {
   let firstNameField;
   let lastNameField;
 
+  console.log(ref);
+
   const userSexChange = (e) => {
     setUserSex(e.target.value);
-    editMade();
+
+    if (props.editMade) {
+      props.editMade();
+    }
   };
   
   const userBirthdayChange = (newBirthday) => {
     setUserBirthday(newBirthday);
-    editMade();
+
+    if (props.editMade) {
+      props.editMade();
+    }
   };
 
   const validateForm = () => {
@@ -65,18 +73,22 @@ const UserForm = ({ user, editMade, submit }) => {
 
     if (!errorsFound) {
       const editedUser = {
-        _id: user ? user.id : null,
+        _id: props.user ? props.user._id : null,
         firstName: firstNameField.value,
         lastName: lastNameField.value,
         sex: sexIntToString(userSex),
         birthday: brithdayDateToString(userBirthday),
-        created:  user ? user.created : now,
+        created:  props.user ? props.user.created : now,
         lastEdit: now,
       };
 
-      submit(editedUser);
+      // console.log(editedUser);
+
+      props.submit(editedUser);
     }
   };
+
+  useImperativeHandle(ref, () => ({sendForm() {validateForm()}}));
 
   return (
     <>
@@ -85,10 +97,10 @@ const UserForm = ({ user, editMade, submit }) => {
               className={classes.userField}
               variant="outlined"
               error={firstNameError}
-              onChange={editMade}
+              onChange={props.editMade ? props.editMade : null}
               label="First Name"
               helperText={firstNameError ? 'Must contain only letters' : ''}
-              defaultValue={user ? user.firstName: ''}
+              defaultValue={props.user ? props.user.firstName: ''}
               inputRef={(ref) => {
                 firstNameField = ref;
               }}
@@ -98,10 +110,10 @@ const UserForm = ({ user, editMade, submit }) => {
               className={classes.userField}
               variant="outlined"
               error={lastNameError}
-              onChange={editMade}
+              onChange={props.editMade ? props.editMade : null}
               label="Last Name"
               helperText={lastNameError ? 'Must contain only letters' : ''}
-              defaultValue={user ? user.lastName : ''}
+              defaultValue={props.user ? props.user.lastName : ''}
               inputRef={(ref) => {
                 lastNameField = ref;
               }}
@@ -131,10 +143,9 @@ const UserForm = ({ user, editMade, submit }) => {
 
             
           </div>
-          <Button onClick={validateForm}>Submit</Button>
           </>
   );
-};
+});
 
 
 export default UserForm;
