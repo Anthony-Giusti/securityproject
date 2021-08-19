@@ -15,6 +15,7 @@ export default makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   name: {
     width: '35%',
@@ -32,10 +33,13 @@ export default makeStyles({
     padding: 0,
   },
   userText: {
-    display: '-webkit-box',
+    // display: '-webkit-box',
     textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
     overflow: 'hidden',
-    '-webkitLineClamp': 2,
-    '-webkitBoxOrient': 'vertical',
+    width: '100%',
+    // overflow: 'hidden',
+    // '-webkitLineClamp': 2,
+    // '-webkitBoxOrient': 'vertical',
   },
 });
