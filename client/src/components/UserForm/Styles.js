@@ -1,5 +1,4 @@
-import { makeStyles, requirePropFactory } from '@material-ui/core';
-import grey from '@material-ui/core/colors/grey';
+import { makeStyles } from '@material-ui/core';
 
 export default makeStyles((theme) => ({
   modalMain: {

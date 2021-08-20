@@ -44,7 +44,7 @@ const User = ({ user, openEditModal, handleRemoveUser }) => {
         <Divider orientation="vertical" flexItem />
 
         <span className={`${classes.infoCell} ${classes.name}`}>
-          <Typography>{user.lastName}</Typography>
+          <Typography className={classes.userText}>{user.lastName}</Typography>
         </span>
 
         <Divider orientation="vertical" flexItem />
