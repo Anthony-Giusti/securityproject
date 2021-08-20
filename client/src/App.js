@@ -1,17 +1,11 @@
 import { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-} from 'react-router-dom';
+import { BrowserRouter as Switch, Route, useHistory } from 'react-router-dom';
 
 import axios from 'axios';
 import { ThemeProvider } from '@material-ui/styles';
 
 import Users from './Pages/Users/Users.jsx';
 import CreateUser from './Pages/CreateUser/CreateUser';
-import userExample from './Data/userExample';
 import NavBar from './components/NavBar/NavBar';
 import createDateAndTimeString from './components/util/functions/createDateAndTimeString';
 

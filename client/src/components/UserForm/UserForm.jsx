@@ -138,4 +138,6 @@ const UserForm = forwardRef((props, ref) => {
   );
 });
 
+UserForm.displayName = 'UserForm';
+
 export default UserForm;

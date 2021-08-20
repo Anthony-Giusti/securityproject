@@ -1,12 +1,5 @@
 import { createTheme } from '@material-ui/core/styles';
-import {
-  blueGrey,
-  red,
-  grey,
-  cyan,
-  teal,
-  green,
-} from '@material-ui/core/colors';
+import { blueGrey, red, grey, green } from '@material-ui/core/colors';
 
 const Theme = createTheme({
   palette: {

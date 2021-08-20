@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 
 import AppBar from '@material-ui/core/AppBar';
