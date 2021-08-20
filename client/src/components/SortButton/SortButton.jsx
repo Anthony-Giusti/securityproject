@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Divider, IconButton, Typography } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import IconButton from '@material-ui/core/IconButton';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
-import useStyles from './styles';
+import useStyles from './Styles';
 
 const SortButton = ({ handleSort, toBeSorted, selectedSortBtn }) => {
   const [currentDirection, setCurrentDirection] = useState('descending');

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { MenuItem, Select } from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 
@@ -21,6 +23,6 @@ const SexPicker = ({ userSex, changeUserSex }) => (
 SexPicker.propTypes = {
   userSex: PropTypes.string,
   changeUserSex: PropTypes.func,
-}
+};
 
 export default SexPicker;

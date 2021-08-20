@@ -1,20 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  FormHelperText,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  Typography,
-} from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormLabel from '@material-ui/core/FormLabel';
+import Typography from '@material-ui/core/Typography';
 
 import useStyles from './Styles';
-import Theme from '../../../../Themes/Theme';
 import brithdayStringToDate from '../../../../components/util/functions/birthdayStringToDate';
 
 const UsersHeaderTools = ({ handleSexFilter, sexFilter, userData }) => {

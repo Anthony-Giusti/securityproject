@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import useStyles from './styles';
+import useStyles from './Styles';
 import UserForm from '../../components/UserForm/UserForm';
 
 const CreateUser = ({ submitUser }) => {
@@ -11,15 +11,22 @@ const CreateUser = ({ submitUser }) => {
   const ref = useRef(null);
 
   const handleSubmit = (newUser) => {
-    console.log(newUser);
-    submitUser(newUser)
-  }
+    submitUser(newUser);
+  };
 
   return (
     <div>
       <Typography>New User</Typography>
-      <div className={classes.userFormContainer}><UserForm user={null} editMade={null} submit={handleSubmit} ref={ref} /></div>
-      <Button variant="contained" color="primary" onClick={() => ref.current.sendForm()}>Submit New User</Button>
+      <div className={classes.userFormContainer}>
+        <UserForm user={null} editMade={null} submit={handleSubmit} ref={ref} />
+      </div>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => ref.current.sendForm()}
+      >
+        Submit New User
+      </Button>
     </div>
   );
 };

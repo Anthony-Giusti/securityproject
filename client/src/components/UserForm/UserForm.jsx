@@ -1,13 +1,6 @@
 /* eslint-disable react/prop-types */
 import DateFnsUtils from '@date-io/date-fns';
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@material-ui/core';
+import { FormControl, MenuItem, TextField } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { useState, forwardRef, useImperativeHandle } from 'react';
 import isAlpha from 'validator/es/lib/isAlpha';
@@ -19,7 +12,7 @@ import sexIntToString from '../util/functions/sexIntToString';
 import sexStringToInt from '../util/functions/sexStringToInt';
 import useStyles from './Styles';
 
-const UserForm = forwardRef ((props, ref) => {
+const UserForm = forwardRef((props, ref) => {
   const [userSex, setUserSex] = useState(
     props.user ? sexStringToInt(props.user.sex) : 3
   );
@@ -34,8 +27,6 @@ const UserForm = forwardRef ((props, ref) => {
   let firstNameField;
   let lastNameField;
 
-  console.log(ref);
-
   const userSexChange = (e) => {
     setUserSex(e.target.value);
 
@@ -43,7 +34,7 @@ const UserForm = forwardRef ((props, ref) => {
       props.editMade();
     }
   };
-  
+
   const userBirthdayChange = (newBirthday) => {
     setUserBirthday(newBirthday);
 
@@ -78,74 +69,73 @@ const UserForm = forwardRef ((props, ref) => {
         lastName: lastNameField.value,
         sex: sexIntToString(userSex),
         birthday: brithdayDateToString(userBirthday),
-        created:  props.user ? props.user.created : now,
+        created: props.user ? props.user.created : now,
         lastEdit: now,
       };
-
-      // console.log(editedUser);
 
       props.submit(editedUser);
     }
   };
 
-  useImperativeHandle(ref, () => ({sendForm() {validateForm()}}));
+  useImperativeHandle(ref, () => ({
+    sendForm() {
+      validateForm();
+    },
+  }));
 
   return (
     <>
-    <div className={classes.userFields}>
-            <TextField
-              className={classes.userField}
-              variant="outlined"
-              error={firstNameError}
-              onChange={props.editMade ? props.editMade : null}
-              label="First Name"
-              helperText={firstNameError ? 'Must contain only letters' : ''}
-              defaultValue={props.user ? props.user.firstName: ''}
-              inputRef={(ref) => {
-                firstNameField = ref;
-              }}
-            />
+      <div className={classes.userFields}>
+        <TextField
+          className={classes.userField}
+          variant="outlined"
+          error={firstNameError}
+          onChange={props.editMade ? props.editMade : null}
+          label="First Name"
+          helperText={firstNameError ? 'Must contain only letters' : ''}
+          defaultValue={props.user ? props.user.firstName : ''}
+          inputRef={(ref) => {
+            firstNameField = ref;
+          }}
+        />
 
-            <TextField
-              className={classes.userField}
-              variant="outlined"
-              error={lastNameError}
-              onChange={props.editMade ? props.editMade : null}
-              label="Last Name"
-              helperText={lastNameError ? 'Must contain only letters' : ''}
-              defaultValue={props.user ? props.user.lastName : ''}
-              inputRef={(ref) => {
-                lastNameField = ref;
-              }}
-            />
+        <TextField
+          className={classes.userField}
+          variant="outlined"
+          error={lastNameError}
+          onChange={props.editMade ? props.editMade : null}
+          label="Last Name"
+          helperText={lastNameError ? 'Must contain only letters' : ''}
+          defaultValue={props.user ? props.user.lastName : ''}
+          inputRef={(ref) => {
+            lastNameField = ref;
+          }}
+        />
 
-            <FormControl className={classes.userField}>
-              <TextField
-                label="Sex"
-                variant="outlined"
-                onChange={userSexChange}
-                value={userSex}
-                select
-              >
-                <MenuItem value={1}>M</MenuItem>
-                <MenuItem value={2}>F</MenuItem>
-                <MenuItem value={3}>NB</MenuItem>
-              </TextField>
-            </FormControl>
+        <FormControl className={classes.userField}>
+          <TextField
+            label="Sex"
+            variant="outlined"
+            onChange={userSexChange}
+            value={userSex}
+            select
+          >
+            <MenuItem value={1}>M</MenuItem>
+            <MenuItem value={2}>F</MenuItem>
+            <MenuItem value={3}>NB</MenuItem>
+          </TextField>
+        </FormControl>
 
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <BirthdayPicker
-                className={classes.userField}
-                userBirthday={userBirthday}
-                userBirthdayChange={userBirthdayChange}
-              />
-            </MuiPickersUtilsProvider>
-
-            
-          </div>
-          </>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <BirthdayPicker
+            className={classes.userField}
+            userBirthday={userBirthday}
+            userBirthdayChange={userBirthdayChange}
+          />
+        </MuiPickersUtilsProvider>
+      </div>
+    </>
   );
 });
-
 
 export default UserForm;
