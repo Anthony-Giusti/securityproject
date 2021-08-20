@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core';
-import { blueGrey, grey } from '@material-ui/core/colors';
 
 export default makeStyles((theme) => ({
   btnActive: {

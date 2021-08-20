@@ -33,13 +33,10 @@ export default makeStyles({
     padding: 0,
   },
   userText: {
-    // display: '-webkit-box',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     width: '100%',
-    // overflow: 'hidden',
-    // '-webkitLineClamp': 2,
-    // '-webkitBoxOrient': 'vertical',
+    minWidth: 0,
   },
 });

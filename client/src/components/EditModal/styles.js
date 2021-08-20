@@ -1,17 +1,10 @@
-import { makeStyles, requirePropFactory } from '@material-ui/core';
-import grey from '@material-ui/core/colors/grey';
+import { makeStyles } from '@material-ui/core';
 
 export default makeStyles((theme) => ({
-  modalMain: {
-    width: '60%',
-  },
   title: {
     display: 'flex',
     flexDirection: 'column',
     paddingLeft: 24,
-  },
-  userId: {
-    padding: '0 24px',
   },
   dateBox: {
     display: 'flex',
@@ -25,12 +18,6 @@ export default makeStyles((theme) => ({
     flexBasis: '50%',
     flexGrow: 1,
     paddingLeft: '1em',
-  },
-  userFields: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-    gridGap: 10,
-    marginTop: '1.5em',
   },
   confirmDialogBtnsContainer: {
     [theme.breakpoints.down('sm')]: {

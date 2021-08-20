@@ -9,18 +9,4 @@ export default makeStyles({
     borderRadius: '0.5em',
     padding: '0 0.5em 0.5em',
   },
-  usersHeader: {
-    display: 'flex',
-    width: '90%',
-    padding: 16,
-  },
-  name: {
-    width: '30%',
-  },
-  sex: {
-    width: '100%',
-  },
-  birthday: {
-    width: '30%',
-  },
 });
