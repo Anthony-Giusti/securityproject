@@ -190,7 +190,7 @@ const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
 };
 
 Users.propTypes = {
-  userData: PropTypes.object,
+  userData: PropTypes.array,
   removeUser: PropTypes.func,
   submitEditedUser: PropTypes.func,
   fetchUserData: PropTypes.func,
