@@ -71,8 +71,8 @@ function App() {
     <ThemeProvider theme={Theme}>
       <div className="App">
         <NavBar />
-        <Switch>
-          <div className={classes.appMain}>
+        <div className={classes.appMain}>
+          <Switch>
             <Route exact path="/">
               <Users
                 userData={userData}
@@ -84,8 +84,8 @@ function App() {
             <Route path="/create-user">
               <CreateUser submitUser={createUser} />
             </Route>
-          </div>
-        </Switch>
+          </Switch>
+        </div>
       </div>
     </ThemeProvider>
   );
