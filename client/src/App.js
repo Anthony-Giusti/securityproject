@@ -14,8 +14,10 @@ import Theme from './Themes/Theme';
 import useStyles from './Styles';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/',
+  baseURL: process.env.REACT_APP_BASE_URL || 'http://localhost:5000/',
 });
+
+console.log(process.env.REACT_APP_BASE_URL);
 
 function App() {
   const [userData, setUserData] = useState([]);
