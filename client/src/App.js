@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter as Switch, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
 
 import axios from 'axios';
 import { ThemeProvider } from '@material-ui/styles';
@@ -65,8 +65,9 @@ function App() {
     <ThemeProvider theme={Theme}>
       <div className="App">
         <NavBar />
-        <div className={classes.appMain}>
-          <Switch>
+
+        <Switch>
+          <div className={classes.appMain}>
             <Route exact path="/">
               <Users
                 userData={userData}
@@ -78,8 +79,8 @@ function App() {
             <Route path="/create-user">
               <CreateUser submitUser={createUser} />
             </Route>
-          </Switch>
-        </div>
+          </div>
+        </Switch>
       </div>
     </ThemeProvider>
   );
