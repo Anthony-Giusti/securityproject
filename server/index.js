@@ -5,12 +5,12 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors({
-  origin: "http://localhost:3000"
+  origin: "*"
 }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 let client;
 let userData;
 
