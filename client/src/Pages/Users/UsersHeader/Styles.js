@@ -5,6 +5,7 @@ export default makeStyles((theme) => ({
     background: theme.palette.primary.main,
     borderRadius: '0.5em 0.5em 0 0',
     margin: '0 -0.5em 0.5em -0.5em',
+    padding: '0 0.5em',
   },
   usersHeader: {
     display: 'flex',
