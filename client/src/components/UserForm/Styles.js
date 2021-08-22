@@ -27,7 +27,7 @@ export default makeStyles((theme) => ({
   },
   userFields: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
     gridGap: 10,
     marginTop: '1.5em',
   },
