@@ -16,7 +16,7 @@ const CreateUser = ({ submitUser }) => {
 
   return (
     <div>
-      <Typography>New User</Typography>
+      <Typography variant="h2">New User</Typography>
       <div className={classes.userFormContainer}>
         <UserForm user={null} editMade={null} submit={handleSubmit} ref={ref} />
       </div>
