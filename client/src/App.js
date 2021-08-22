@@ -17,8 +17,6 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL || 'http://localhost:5000/',
 });
 
-console.log(process.env.REACT_APP_BASE_URL);
-
 function App() {
   const [userData, setUserData] = useState([]);
 
