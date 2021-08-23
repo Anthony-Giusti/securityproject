@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Divider, IconButton, Typography } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/styles';
 
 import UsersHeaderTools from './UsersHeaderTools/UsersHeaderTools';
 
@@ -13,7 +17,11 @@ import SortButton from '../../../components/SortButton/SortButton';
 const UsersHeader = ({ handleSexFilter, sortUsers, userData, sexFilter }) => {
   const [expandedHeader, setExpandedHeader] = useState(false);
   const [selectedSortBtn, setSelectedSortBtn] = useState('_id');
+
   const classes = useStyles();
+  const theme = useTheme();
+
+  const smDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleSort = (direction, toBeSorted) => {
     sortUsers(direction, toBeSorted);
@@ -58,7 +66,9 @@ const UsersHeader = ({ handleSexFilter, sortUsers, userData, sexFilter }) => {
           <Divider light orientation="vertical" flexItem />
 
           <div className={classes.birthday}>
-            <Typography className={classes.columnName}>Birthday</Typography>
+            <Typography className={classes.columnName}>
+              {smDevice ? 'Birth Day' : 'Birthday'}
+            </Typography>
             <SortButton
               handleSort={handleSort}
               toBeSorted="birthday"
@@ -75,7 +85,11 @@ const UsersHeader = ({ handleSexFilter, sortUsers, userData, sexFilter }) => {
             size="small"
             onClick={handleExpandHeader}
           >
-            {expandedHeader ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            {expandedHeader ? (
+              <ExpandLessIcon fontSize={smDevice ? 'default' : 'large'} />
+            ) : (
+              <ExpandMoreIcon fontSize={smDevice ? 'default' : 'large'} />
+            )}
           </IconButton>
         </span>
       </div>
