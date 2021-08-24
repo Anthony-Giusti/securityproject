@@ -1,5 +1,5 @@
 import { createTheme } from '@material-ui/core/styles';
-import { blueGrey, red, grey, green } from '@material-ui/core/colors';
+import { blueGrey, red } from '@material-ui/core/colors';
 
 const Theme = createTheme({
   palette: {
@@ -7,18 +7,6 @@ const Theme = createTheme({
       main: blueGrey[700],
     },
     secondary: {
-      main: red[900],
-    },
-    selected: {
-      main: '#81c784',
-    },
-    default: {
-      main: grey[300],
-    },
-    positive: {
-      main: green[400],
-    },
-    negitive: {
       main: red[900],
     },
   },
