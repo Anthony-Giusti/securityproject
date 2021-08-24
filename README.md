@@ -7,5 +7,5 @@
 ## For node server
 
 1: CD into "server"  
-2: npm install (and npm install -g node if you need node.js)  
+2: npm install (install node.js if you don't have it as well)  
 3: node index.js  
