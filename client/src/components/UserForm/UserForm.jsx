@@ -1,15 +1,19 @@
 /* eslint-disable react/prop-types */
-import DateFnsUtils from '@date-io/date-fns';
+import { useState, forwardRef, useImperativeHandle } from 'react';
+
 import { FormControl, MenuItem, TextField } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { useState, forwardRef, useImperativeHandle } from 'react';
+
 import isAlpha from 'validator/es/lib/isAlpha';
+import DateFnsUtils from '@date-io/date-fns';
+
 import BirthdayPicker from '../BirthdayPicker/BirthdayPicker';
 import brithdayDateToString from '../util/functions/birthdayDateToString';
 import brithdayStringToDate from '../util/functions/birthdayStringToDate';
 import createDateAndTimeString from '../util/functions/createDateAndTimeString';
 import sexIntToString from '../util/functions/sexIntToString';
 import sexStringToInt from '../util/functions/sexStringToInt';
+
 import useStyles from './Styles';
 
 const UserForm = forwardRef((props, ref) => {
