@@ -38,7 +38,7 @@ function App() {
 
   const createUser = async (newUser) => {
     await api.post('/createNewUser', { newUser }).then((response) => {
-      console.log(response);
+      // console.log(response);
     });
 
     history.push('/');
