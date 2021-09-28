@@ -1,5 +1,6 @@
+// @ts-nocheck
 import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -17,7 +18,15 @@ import useStyles from './Styles';
 
 import UserForm from '../UserForm/UserForm';
 
-const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
+import IUser from '../../shared/interfaces/User.interface';
+
+interface IProps {
+  editModalOpen: boolean;
+  closeEditModal: (action: string, editedUser: IUser | null) => void;
+  selectedUser: IUser
+}
+
+const EditModal: React.FC<IProps> = ({ editModalOpen, closeEditModal, selectedUser }) => {
   const [isEdited, setIsEdited] = useState(false);
   const [editModalConfirmOpen, setEditModalConfirmOpen] = useState(false);
 
@@ -52,7 +61,7 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
     }
   };
 
-  const handleSubmit = (editedUser) => {
+  const handleSubmit = (editedUser: IUser) => {
     setEditModalConfirmOpen(false);
     setIsEdited(false);
     closeEditModal('submit', editedUser);
@@ -154,10 +163,10 @@ const EditModal = ({ editModalOpen, closeEditModal, selectedUser }) => {
   );
 };
 
-EditModal.propTypes = {
-  editModalOpen: PropTypes.bool,
-  closeEditModal: PropTypes.func,
-  selectedUser: PropTypes.object,
-};
+// EditModal.propTypes = {
+//   editModalOpen: PropTypes.bool,
+//   closeEditModal: PropTypes.func,
+//   selectedUser: PropTypes.object,
+// };
 
 export default EditModal;

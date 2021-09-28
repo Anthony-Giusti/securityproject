@@ -1,10 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
-const BirthdayPicker = ({ userBirthday, userBirthdayChange }) => {
-  const handleDateChange = (newBirthday) => {
+interface IProps {
+  userBirthday: Date;
+  userBirthdayChange: (newBirthDay: Date) => void
+}
+
+const BirthdayPicker: React.FC<IProps> = ({ userBirthday, userBirthdayChange }) => {
+  const handleDateChange = (newBirthday: Date) => {
     userBirthdayChange(newBirthday);
   };
 
@@ -18,7 +23,7 @@ const BirthdayPicker = ({ userBirthday, userBirthdayChange }) => {
         format="MM/dd/yyyy"
         maxDate={new Date()}
         value={userBirthday}
-        onChange={handleDateChange}
+        onChange={() => handleDateChange}
         KeyboardButtonProps={{
           'aria-label': 'change date',
         }}
@@ -27,9 +32,9 @@ const BirthdayPicker = ({ userBirthday, userBirthdayChange }) => {
   );
 };
 
-BirthdayPicker.propTypes = {
-  userBirthday: PropTypes.object,
-  userBirthdayChange: PropTypes.func,
-};
+// BirthdayPicker.propTypes = {
+//   userBirthday: PropTypes.object,
+//   userBirthdayChange: PropTypes.func,
+// };
 
 export default BirthdayPicker;

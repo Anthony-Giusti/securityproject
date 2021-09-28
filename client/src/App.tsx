@@ -1,5 +1,7 @@
+// @ts-nocheck
 import { useState } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
+
 
 import axios from 'axios';
 import { ThemeProvider } from '@material-ui/styles';
@@ -13,19 +15,21 @@ import './App.css';
 import Theme from './Themes/Theme';
 import useStyles from './Styles';
 
+import IUser from './shared/interfaces/User.interface';
+
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL || 'http://localhost:5000/',
 });
 
-function App() {
-  const [userData, setUserData] = useState([]);
+const App: React.FC = () => {
+  const [userData, setUserData] = useState<IUser[]>([]);
 
   const classes = useStyles();
   const history = useHistory();
 
   const fetchUserData = async () => {
     await api
-      .get('/getUserData', {
+      .get<IUser[]>('/getUserData', {
         headers: {
           'Access-Control-Allow-Origin': '*',
         },
@@ -36,22 +40,22 @@ function App() {
       });
   };
 
-  const createUser = async (newUser) => {
+  const createUser = async (newUser: IUser) => {
     await api.post('/createNewUser', { newUser }).then((response) => {
-      // console.log(response);
+      console.log(response);
     });
 
     history.push('/');
   };
 
-  const removeUser = (userId) => {
+  const removeUser = (userId: string) => {
     const newUsers = userData.filter((user) => user._id !== userId);
     setUserData(newUsers);
 
     api.get(`/deleteUser?userId=${userId}`);
   };
 
-  const editUser = (editedUser) => {
+  const editUser = (editedUser: IUser) => {
     editedUser.lastEdit = createDateAndTimeString();
     const newUsers = [...userData];
     const userIndex = userData.findIndex((user) => user._id === editedUser._id);

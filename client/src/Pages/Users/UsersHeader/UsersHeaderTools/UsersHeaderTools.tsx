@@ -1,3 +1,5 @@
+
+// @ts-nocheck
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -11,8 +13,16 @@ import Typography from '@material-ui/core/Typography';
 import useStyles from './Styles';
 import brithdayStringToDate from '../../../../components/util/functions/birthdayStringToDate';
 
-const UsersHeaderTools = ({ handleSexFilter, sexFilter, userData }) => {
-  const handleChange = (e) => {
+import IUser from '../../../../shared/interfaces/User.interface';
+
+interface IProps {
+  handleSexFilter: (newSex: string) => void;
+  sexFilter: string[];
+  userData: IUser[];
+}
+
+const UsersHeaderTools: React.FC<IProps> = ({ handleSexFilter, sexFilter, userData }) => {
+  const handleChange = (e: React.FormEvent) => {
     handleSexFilter(e.target.value);
   };
 
@@ -70,10 +80,10 @@ const UsersHeaderTools = ({ handleSexFilter, sexFilter, userData }) => {
   );
 };
 
-UsersHeaderTools.propTypes = {
-  handleSexFilter: PropTypes.func,
-  sexFilter: PropTypes.array,
-  userData: PropTypes.array,
-};
+// UsersHeaderTools.propTypes = {
+//   handleSexFilter: PropTypes.func,
+//   sexFilter: PropTypes.array,
+//   userData: PropTypes.array,
+// };
 
 export default UsersHeaderTools;

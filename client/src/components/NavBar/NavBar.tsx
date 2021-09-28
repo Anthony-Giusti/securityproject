@@ -11,14 +11,14 @@ import { useTheme } from '@material-ui/styles';
 
 import useStyles from './Styles';
 
-const NavBar = () => {
+const NavBar: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
   const classes = useStyles();
   const theme = useTheme();
   const mdDevice = useMediaQuery(theme.breakpoints.up('sm'));
 
-  const handlePageChange = (route) => {
+  const handlePageChange = (route: string) => {
     history.push(route);
   };
 

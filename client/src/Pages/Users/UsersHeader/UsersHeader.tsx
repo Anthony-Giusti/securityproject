@@ -1,5 +1,6 @@
+// @ts-nocheck
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,7 +15,16 @@ import UsersHeaderTools from './UsersHeaderTools/UsersHeaderTools';
 import useStyles from './Styles';
 import SortButton from '../../../components/SortButton/SortButton';
 
-const UsersHeader = ({ handleSexFilter, sortUsers, userData, sexFilter }) => {
+import IUser from '../../../shared/interfaces/User.interface';
+
+interface IProps {
+  handleSexFilter: (newSex: string) => void;
+  sortUsers: (order: string, list: string) => void;
+  userData: IUser[];
+  sexFilter: string[];
+}
+
+const UsersHeader: React.FC<IProps> = ({ handleSexFilter, sortUsers, userData, sexFilter }) => {
   const [expandedHeader, setExpandedHeader] = useState(false);
   const [selectedSortBtn, setSelectedSortBtn] = useState('_id');
 
@@ -23,10 +33,10 @@ const UsersHeader = ({ handleSexFilter, sortUsers, userData, sexFilter }) => {
 
   const smDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleSort = (direction, toBeSorted) => {
-    sortUsers(direction, toBeSorted);
+  const handleSort = (order: string, list: string) => {
+    sortUsers(order, list);
 
-    setSelectedSortBtn(toBeSorted);
+    setSelectedSortBtn(list);
   };
 
   const handleExpandHeader = () => {
@@ -104,11 +114,11 @@ const UsersHeader = ({ handleSexFilter, sortUsers, userData, sexFilter }) => {
   );
 };
 
-UsersHeader.propTypes = {
-  handleSexFilter: PropTypes.func,
-  sortUsers: PropTypes.func,
-  userData: PropTypes.array,
-  sexFilter: PropTypes.array,
-};
+// UsersHeader.propTypes = {
+//   handleSexFilter: PropTypes.func,
+//   sortUsers: PropTypes.func,
+//   userData: PropTypes.array,
+//   sexFilter: PropTypes.array,
+// };
 
 export default UsersHeader;

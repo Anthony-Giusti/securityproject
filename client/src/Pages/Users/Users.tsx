@@ -1,5 +1,6 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -15,12 +16,21 @@ import EditModal from '../../components/EditModal/EditModal';
 import UsersHeader from './UsersHeader/UsersHeader';
 import brithdayStringToDate from '../../components/util/functions/birthdayStringToDate';
 
-const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
-  const [selectedUser, setSelectedUser] = useState(null);
+import IUser from '../../shared/interfaces/User.interface';
+
+interface IProps {
+  userData: IUser[];
+  removeUser: (userId: string) => void;
+  submitEditedUser: (editedUser: IUser) => void;
+  fetchUserData: () => void; 
+}
+
+const Users: React.FC<IProps> = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
+  const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [sexFilter, setSexFilter] = useState([]);
-  const [visibleUserData, setVisibleUserData] = useState([]);
+  const [sexFilter, setSexFilter] = useState<string[]>([]);
+  const [visibleUserData, setVisibleUserData] = useState<IUser[]>([]);
   const [currentSort, setCurrentSort] = useState({
     property: '_id',
     order: 'ascending',
@@ -28,12 +38,12 @@ const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
 
   const classes = useStyles();
 
-  const openEditModal = (user) => {
+  const openEditModal = (user: IUser) => {
     setSelectedUser(user);
     setEditModalOpen(true);
   };
 
-  const closeEditModal = (action, editedUser) => {
+  const closeEditModal = (action: string, editedUser: IUser | null) => {
     if (action === 'submit') {
       submitEditedUser(editedUser);
     }
@@ -41,7 +51,7 @@ const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
     setSelectedUser(null);
   };
 
-  const handleSexFilter = (newSex) => {
+  const handleSexFilter = (newSex: string) => {
     if (sexFilter.includes(newSex)) {
       setSexFilter((prev) => prev.filter((sex) => sex !== newSex));
     } else {
@@ -49,8 +59,8 @@ const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
     }
   };
 
-  const filterUsers = (users) => {
-    const filteredUsers = [];
+  const filterUsers = (users: IUser[]) => {
+    const filteredUsers: IUser[] = [];
 
     users.forEach((user) => {
       for (let x = 0; x < sexFilter.length; x += 1) {
@@ -64,7 +74,7 @@ const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
     return filteredUsers;
   };
 
-  const sortByBirthday = (users, order) => {
+  const sortByBirthday = (users: IUser[], order: string) => {
     const filteredUsers = [...userData];
 
     if (order === 'descending') {
@@ -84,25 +94,25 @@ const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
     return filteredUsers;
   };
 
-  const sortUsers = (users, order, list) => {
+  const sortUsers = (users: IUser[], order: string, list: string) => {
     const filteredUsers = users;
 
     if (order === 'descending') {
       filteredUsers.sort((a, b) =>
-        a[list].toLowerCase() > b[list].toLowerCase() ? 1 : -1
+        a[list as keyof IUser].toLowerCase() > b[list as keyof IUser].toLowerCase() ? 1 : -1
       );
     }
 
     if (order === 'ascending') {
       filteredUsers.sort((a, b) =>
-        a[list].toLowerCase() < b[list].toLowerCase() ? 1 : -1
+        a[list as keyof IUser].toLowerCase() < b[list as keyof IUser].toLowerCase() ? 1 : -1
       );
     }
 
     return filteredUsers;
   };
 
-  const handleSortUsers = (order, list) => {
+  const handleSortUsers = (order: string, list: string) => {
     let sortedUsers = [...userData];
 
     if (list === 'birthday') {
@@ -120,15 +130,17 @@ const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
     }
   };
 
-  const confirmRemoveUser = (user) => {
+  const confirmRemoveUser = (user: IUser) => {
     setSelectedUser(user);
     setDeleteDialogOpen(true);
   };
 
   const handleRemoveUser = () => {
+    if (selectedUser) {
     removeUser(selectedUser._id);
     setSelectedUser(null);
     setDeleteDialogOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -189,11 +201,11 @@ const Users = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
   );
 };
 
-Users.propTypes = {
-  userData: PropTypes.array,
-  removeUser: PropTypes.func,
-  submitEditedUser: PropTypes.func,
-  fetchUserData: PropTypes.func,
-};
+// Users.propTypes = {
+//   userData: PropTypes.array,
+//   removeUser: PropTypes.func,
+//   submitEditedUser: PropTypes.func,
+//   fetchUserData: PropTypes.func,
+// };
 
 export default Users;

@@ -56,6 +56,11 @@
     "comma-dangle": 0,
     "max-len": 0,
     "import/extensions": 0,
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    },
     "no-underscore-dangle": 0,
     "consistent-return": 0,
     "react/display-name": 1,
@@ -72,7 +77,9 @@
       {
         "extensions": [
           ".js",
-          ".jsx"
+          ".jsx",
+          ".ts",
+          ".tsx"
         ]
       }
     ],
