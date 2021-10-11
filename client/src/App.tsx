@@ -1,12 +1,11 @@
-// @ts-nocheck
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useState } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
-
 
 import axios from 'axios';
 import { ThemeProvider } from '@material-ui/styles';
 
-import Users from './Pages/Users/Users.jsx';
+import Users from './Pages/Users/Users';
 import CreateUser from './Pages/CreateUser/CreateUser';
 import NavBar from './components/NavBar/NavBar';
 import createDateAndTimeString from './components/util/functions/createDateAndTimeString';
@@ -87,6 +86,6 @@ const App: React.FC = () => {
       </div>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

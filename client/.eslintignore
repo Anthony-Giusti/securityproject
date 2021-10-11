@@ -1,2 +1,6 @@
-**/.js
-**/.jsx
+/*.js
+**/*.js
+/src/App.js
+/src/*.js
+/*
+**/*.js

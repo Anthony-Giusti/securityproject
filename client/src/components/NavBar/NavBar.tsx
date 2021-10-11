@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useHistory, useLocation } from 'react-router';
 
 import AppBar from '@material-ui/core/AppBar';
