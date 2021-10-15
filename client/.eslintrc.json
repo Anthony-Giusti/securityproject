@@ -24,6 +24,9 @@
   },
   "ignorePatterns": ["*/*.js"],
   "rules": {
+    "rules": {
+      "react/prop-types": 0
+    },
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": 0,
     "no-debugger": 0,
