@@ -1,21 +1,20 @@
-// @ts-nocheck
-import { useRef } from 'react';
-import PropTypes from 'prop-types';
+import { useRef, forwardRef } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './Styles';
 import UserForm from '../../components/UserForm/UserForm';
 
-import IUser from '../../shared/interfaces/User.interface';
+import { IUser } from '../../shared/interfaces/User.interface';
 
 interface IProps {
-  submitUser: (newUser: IUser) => void
+  submitUser: (newUser: IUser) => void;
 }
 
 const CreateUser: React.FC<IProps> = ({ submitUser }) => {
   const classes = useStyles();
-  const ref = useRef(null);
+  // const ref = useRef(null);
+  const ref = useRef(document.createElement("form"));
 
   const handleSubmit = (newUser: IUser) => {
     submitUser(newUser);
@@ -37,9 +36,5 @@ const CreateUser: React.FC<IProps> = ({ submitUser }) => {
     </div>
   );
 };
-
-// CreateUser.propTypes = {
-//   submitUser: PropTypes.func,
-// };
 
 export default CreateUser;

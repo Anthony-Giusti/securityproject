@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
@@ -31,10 +30,5 @@ const BirthdayPicker: React.FC<IProps> = ({ userBirthday, userBirthdayChange }) 
     </>
   );
 };
-
-// BirthdayPicker.propTypes = {
-//   userBirthday: PropTypes.object,
-//   userBirthdayChange: PropTypes.func,
-// };
 
 export default BirthdayPicker;

@@ -1,6 +1,4 @@
-// @ts-nocheck
 import React, { useRef, useState } from 'react';
-// import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -12,13 +10,13 @@ import CheckIcon from '@material-ui/icons/Check';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/styles';
+import { useTheme } from '@material-ui/core/styles';
 
 import useStyles from './Styles';
 
 import UserForm from '../UserForm/UserForm';
 
-import IUser from '../../shared/interfaces/User.interface';
+import { IUser } from '../../shared/interfaces/User.interface';
 
 interface IProps {
   editModalOpen: boolean;
@@ -30,7 +28,7 @@ const EditModal: React.FC<IProps> = ({ editModalOpen, closeEditModal, selectedUs
   const [isEdited, setIsEdited] = useState(false);
   const [editModalConfirmOpen, setEditModalConfirmOpen] = useState(false);
 
-  const ref = useRef(null);
+  const ref = useRef(document.createElement("form"));
 
   const classes = useStyles();
   const theme = useTheme();
@@ -112,7 +110,7 @@ const EditModal: React.FC<IProps> = ({ editModalOpen, closeEditModal, selectedUs
           <Button
             variant="contained"
             startIcon={<CheckIcon />}
-            className={classes.negitiveBtn}
+            // className={classes.negitiveBtn}
             color="primary"
             onClick={() => ref.current.sendForm()}
             disabled={!isEdited}
@@ -120,7 +118,7 @@ const EditModal: React.FC<IProps> = ({ editModalOpen, closeEditModal, selectedUs
             Confirm Edits
           </Button>
           <Button
-            className={classes.negitiveBtn}
+            // className={classes.negitiveBtn}
             onClick={() => closeEditModal('discard', null)}
           >
             Cancel
@@ -140,7 +138,7 @@ const EditModal: React.FC<IProps> = ({ editModalOpen, closeEditModal, selectedUs
               variant="contained"
               startIcon={<CheckIcon />}
               color="primary"
-              onClick={() => ref.current.sendForm()}
+              onClick={ref.current.sendForm()}
             >
               Confirm Edits
             </Button>
@@ -162,11 +160,5 @@ const EditModal: React.FC<IProps> = ({ editModalOpen, closeEditModal, selectedUs
     </>
   );
 };
-
-// EditModal.propTypes = {
-//   editModalOpen: PropTypes.bool,
-//   closeEditModal: PropTypes.func,
-//   selectedUser: PropTypes.object,
-// };
 
 export default EditModal;

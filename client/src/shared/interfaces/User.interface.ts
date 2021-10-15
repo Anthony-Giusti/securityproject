@@ -1,4 +1,4 @@
-interface IUser {
+export interface IUser {
   _id: string;
   firstName: string;
   lastName: string;
@@ -8,4 +8,5 @@ interface IUser {
   lastEdit: string;
 }
 
-export default IUser;
+export type userProperty = "_id" | "firstName" | "lastName" | "sex" | "birthday";
+export type listOrder = 'ascending' | 'descending';

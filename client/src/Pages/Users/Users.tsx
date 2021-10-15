@@ -1,6 +1,4 @@
-// @ts-nocheck
 import React, { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -16,7 +14,7 @@ import EditModal from '../../components/EditModal/EditModal';
 import UsersHeader from './UsersHeader/UsersHeader';
 import brithdayStringToDate from '../../components/util/functions/birthdayStringToDate';
 
-import IUser from '../../shared/interfaces/User.interface';
+import { IUser, userProperty, listOrder } from '../../shared/interfaces/User.interface';
 
 interface IProps {
   userData: IUser[];
@@ -31,7 +29,10 @@ const Users: React.FC<IProps> = ({ userData, removeUser, submitEditedUser, fetch
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [sexFilter, setSexFilter] = useState<string[]>([]);
   const [visibleUserData, setVisibleUserData] = useState<IUser[]>([]);
-  const [currentSort, setCurrentSort] = useState({
+  const [currentSort, setCurrentSort] = useState<{
+    property: userProperty;
+    order: listOrder;
+  }>({
     property: '_id',
     order: 'ascending',
   });
@@ -44,7 +45,7 @@ const Users: React.FC<IProps> = ({ userData, removeUser, submitEditedUser, fetch
   };
 
   const closeEditModal = (action: string, editedUser: IUser | null) => {
-    if (action === 'submit') {
+    if (action === 'submit' && editedUser) {
       submitEditedUser(editedUser);
     }
     setEditModalOpen(false);
@@ -94,25 +95,25 @@ const Users: React.FC<IProps> = ({ userData, removeUser, submitEditedUser, fetch
     return filteredUsers;
   };
 
-  const sortUsers = (users: IUser[], order: string, list: string) => {
+  const sortUsers = (users: IUser[], order: listOrder, listItem: userProperty) => {
     const filteredUsers = users;
 
     if (order === 'descending') {
       filteredUsers.sort((a, b) =>
-        a[list as keyof IUser].toLowerCase() > b[list as keyof IUser].toLowerCase() ? 1 : -1
+        a[listItem as keyof IUser].toLowerCase() > b[listItem as keyof IUser].toLowerCase() ? 1 : -1
       );
     }
 
     if (order === 'ascending') {
       filteredUsers.sort((a, b) =>
-        a[list as keyof IUser].toLowerCase() < b[list as keyof IUser].toLowerCase() ? 1 : -1
+        a[listItem as keyof IUser].toLowerCase() < b[listItem as keyof IUser].toLowerCase() ? 1 : -1
       );
     }
 
     return filteredUsers;
   };
 
-  const handleSortUsers = (order: string, list: string) => {
+  const handleSortUsers = (order: listOrder, list: userProperty) => {
     let sortedUsers = [...userData];
 
     if (list === 'birthday') {
@@ -136,7 +137,7 @@ const Users: React.FC<IProps> = ({ userData, removeUser, submitEditedUser, fetch
   };
 
   const handleRemoveUser = () => {
-    if (selectedUser) {
+    if (selectedUser && selectedUser._id) {
     removeUser(selectedUser._id);
     setSelectedUser(null);
     setDeleteDialogOpen(false);
@@ -200,12 +201,5 @@ const Users: React.FC<IProps> = ({ userData, removeUser, submitEditedUser, fetch
     </div>
   );
 };
-
-// Users.propTypes = {
-//   userData: PropTypes.array,
-//   removeUser: PropTypes.func,
-//   submitEditedUser: PropTypes.func,
-//   fetchUserData: PropTypes.func,
-// };
 
 export default Users;

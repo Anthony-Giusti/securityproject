@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
+import { userProperty, listOrder } from '../../shared/interfaces/User.interface';
+
 import useStyles from './Styles';
 
 interface IProps {
-  handleSort: (order: string, list: string) => void;
-  toBeSorted: string;
+  handleSort: (order: listOrder, list: userProperty) => void;
+  toBeSorted: userProperty;
   selectedSortBtn: string;
 }
 
@@ -17,7 +18,7 @@ const SortButton: React.FC<IProps> = ({ handleSort, toBeSorted, selectedSortBtn 
   const [currentDirection, setCurrentDirection] = useState('descending');
   const classes = useStyles();
 
-  const handleClick = (order: string) => {
+  const handleClick = (order: listOrder) => {
     handleSort(order, toBeSorted);
 
     if (order === 'ascending') {
@@ -56,11 +57,5 @@ const SortButton: React.FC<IProps> = ({ handleSort, toBeSorted, selectedSortBtn 
     </>
   );
 };
-
-// SortButton.propTypes = {
-//   handleSort: PropTypes.func,
-//   toBeSorted: PropTypes.string,
-//   selectedSortBtn: PropTypes.string,
-// };
 
 export default SortButton;

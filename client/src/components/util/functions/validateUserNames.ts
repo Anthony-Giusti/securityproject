@@ -1,6 +1,6 @@
 import isAlpha from 'validator/es/lib/isAlpha';
 
-import IUser from '../../../shared/interfaces/User.interface';
+import { IUser } from '../../../shared/interfaces/User.interface';
 
 const validateUserNames = (user: IUser) => {
   const errors = {

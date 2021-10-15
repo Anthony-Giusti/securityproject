@@ -1,6 +1,4 @@
-// @ts-nocheck
-/* eslint-disable react/prop-types */
-import { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 
 import { FormControl, MenuItem, TextField } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -16,8 +14,15 @@ import sexIntToString from '../util/functions/sexIntToString';
 import sexStringToInt from '../util/functions/sexStringToInt';
 
 import useStyles from './Styles';
+import { IUser } from '../../shared/interfaces/User.interface';
 
-const UserForm = forwardRef((props, ref) => {
+interface IProps {
+  user: IUser | null;
+  editMade: (() => void) | null;
+  submit: (user: IUser) => void;
+}
+
+const UserForm = forwardRef((props: IProps, ref) => {
   const [userSex, setUserSex] = useState(
     props.user ? sexStringToInt(props.user.sex) : 3
   );
@@ -29,18 +34,18 @@ const UserForm = forwardRef((props, ref) => {
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
 
-  let firstNameField;
-  let lastNameField;
+  let firstNameField: HTMLTextAreaElement;
+  let lastNameField: HTMLTextAreaElement;
 
-  const userSexChange = (e) => {
-    setUserSex(e.target.value);
+  const userSexChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserSex(sexStringToInt(e.target.value));
 
     if (props.editMade) {
       props.editMade();
     }
   };
 
-  const userBirthdayChange = (newBirthday) => {
+  const userBirthdayChange = (newBirthday: Date) => {
     setUserBirthday(newBirthday);
 
     if (props.editMade) {
@@ -68,8 +73,8 @@ const UserForm = forwardRef((props, ref) => {
     const now = createDateAndTimeString();
 
     if (!errorsFound) {
-      const editedUser = {
-        _id: props.user ? props.user._id : null,
+      const editedUser: IUser = {
+        _id: props.user ? props.user._id : '',
         firstName: firstNameField.value,
         lastName: lastNameField.value,
         sex: sexIntToString(userSex),
@@ -92,10 +97,11 @@ const UserForm = forwardRef((props, ref) => {
     <>
       <div className={classes.userFields}>
         <TextField
-          className={classes.userField}
+          // className={classes.userField}
           variant="outlined"
           error={firstNameError}
-          onChange={props.editMade ? props.editMade : null}
+          onChange={props.editMade ? props.editMade : undefined}
+          // onChange={props.editMade}
           label="First Name"
           helperText={firstNameError ? 'Must contain only letters' : ''}
           defaultValue={props.user ? props.user.firstName : ''}
@@ -105,10 +111,11 @@ const UserForm = forwardRef((props, ref) => {
         />
 
         <TextField
-          className={classes.userField}
+          // className={classes.userField}
           variant="outlined"
           error={lastNameError}
-          onChange={props.editMade ? props.editMade : null}
+          onChange={props.editMade ? props.editMade : undefined}
+          // onChange={props.editMade}
           label="Last Name"
           helperText={lastNameError ? 'Must contain only letters' : ''}
           defaultValue={props.user ? props.user.lastName : ''}
@@ -117,7 +124,7 @@ const UserForm = forwardRef((props, ref) => {
           }}
         />
 
-        <FormControl className={classes.userField}>
+        <FormControl /*className={classes.userField}*/>
           <TextField
             label="Sex"
             variant="outlined"
@@ -133,7 +140,7 @@ const UserForm = forwardRef((props, ref) => {
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <BirthdayPicker
-            className={classes.userField}
+            // className={classes.userField}
             userBirthday={userBirthday}
             userBirthdayChange={userBirthdayChange}
           />

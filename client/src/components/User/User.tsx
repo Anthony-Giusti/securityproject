@@ -1,6 +1,4 @@
-// @ts-nocheck
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -16,10 +14,10 @@ import EditIcon from '@material-ui/icons/Edit';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
 
-import { useTheme } from '@material-ui/styles';
+import { useTheme } from '@material-ui/core/styles';
 import useStyles from './Styles';
 
-import IUser from '../../shared/interfaces/User.interface';
+import { IUser } from '../../shared/interfaces/User.interface';
 
 interface IProps {
   user: IUser;
@@ -117,11 +115,5 @@ const User: React.FC<IProps> = ({ user, openEditModal, handleRemoveUser }) => {
     </Card>
   );
 };
-
-// User.propTypes = {
-//   user: PropTypes.object,
-//   openEditModal: PropTypes.func,
-//   handleRemoveUser: PropTypes.func,
-// };
 
 export default User;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useState } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ import './App.css';
 import Theme from './Themes/Theme';
 import useStyles from './Styles';
 
-import IUser from './shared/interfaces/User.interface';
+import { IUser } from './shared/interfaces/User.interface';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL || 'http://localhost:5000/',
