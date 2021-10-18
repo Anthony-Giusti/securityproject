@@ -22,11 +22,9 @@
     "jquery": true,
     "jest": true
   },
-  "ignorePatterns": ["*/*.js"],
+  "ignorePatterns": ["*/*.js", "*/*.jsx"],
   "rules": {
-    "rules": {
-      "react/prop-types": 0
-    },
+    "react/prop-types": 0,
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": 0,
     "no-debugger": 0,
