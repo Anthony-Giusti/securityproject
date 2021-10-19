@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { useHistory, useLocation } from 'react-router';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -9,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ListIcon from '@material-ui/icons/List';
 import AddIcon from '@material-ui/icons/Add';
-import { useTheme } from '@material-ui/styles';
+import { useTheme } from '@material-ui/core/styles';
 
 import useStyles from './Styles';
 
