@@ -8,5 +8,10 @@ export interface IUser {
   lastEdit: string;
 }
 
-export type userProperty = "_id" | "firstName" | "lastName" | "sex" | "birthday";
+export type userProperty =
+  | '_id'
+  | 'firstName'
+  | 'lastName'
+  | 'sex'
+  | 'birthday';
 export type listOrder = 'ascending' | 'descending';
