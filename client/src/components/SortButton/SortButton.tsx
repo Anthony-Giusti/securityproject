@@ -4,7 +4,10 @@ import IconButton from '@material-ui/core/IconButton';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
-import { userProperty, listOrder } from '../../shared/interfaces/User.interface';
+import {
+  userProperty,
+  listOrder,
+} from '../../shared/interfaces/User.interface';
 
 import useStyles from './Styles';
 
@@ -14,7 +17,11 @@ interface IProps {
   selectedSortBtn: string;
 }
 
-const SortButton: React.FC<IProps> = ({ handleSort, toBeSorted, selectedSortBtn }) => {
+const SortButton: React.FC<IProps> = ({
+  handleSort,
+  toBeSorted,
+  selectedSortBtn,
+}) => {
   const [currentDirection, setCurrentDirection] = useState('descending');
   const classes = useStyles();
 

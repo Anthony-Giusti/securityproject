@@ -124,7 +124,7 @@ const UserForm = forwardRef((props: IProps, ref) => {
           }}
         />
 
-        <FormControl /*className={classes.userField}*/>
+        <FormControl /* className={classes.userField} */>
           <TextField
             label="Sex"
             variant="outlined"

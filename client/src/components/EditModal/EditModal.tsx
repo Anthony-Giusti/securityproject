@@ -21,14 +21,18 @@ import { IUser } from '../../shared/interfaces/User.interface';
 interface IProps {
   editModalOpen: boolean;
   closeEditModal: (action: string, editedUser: IUser | null) => void;
-  selectedUser: IUser
+  selectedUser: IUser;
 }
 
-const EditModal: React.FC<IProps> = ({ editModalOpen, closeEditModal, selectedUser }) => {
+const EditModal: React.FC<IProps> = ({
+  editModalOpen,
+  closeEditModal,
+  selectedUser,
+}) => {
   const [isEdited, setIsEdited] = useState(false);
   const [editModalConfirmOpen, setEditModalConfirmOpen] = useState(false);
 
-  const ref = useRef(document.createElement("form"));
+  const ref = useRef(document.createElement('form'));
 
   const classes = useStyles();
   const theme = useTheme();

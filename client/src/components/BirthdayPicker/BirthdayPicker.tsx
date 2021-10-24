@@ -4,10 +4,13 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 
 interface IProps {
   userBirthday: Date;
-  userBirthdayChange: (newBirthDay: Date) => void
+  userBirthdayChange: (newBirthDay: Date) => void;
 }
 
-const BirthdayPicker: React.FC<IProps> = ({ userBirthday, userBirthdayChange }) => {
+const BirthdayPicker: React.FC<IProps> = ({
+  userBirthday,
+  userBirthdayChange,
+}) => {
   const handleDateChange = (newBirthday: Date) => {
     userBirthdayChange(newBirthday);
   };

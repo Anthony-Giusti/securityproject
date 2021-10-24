@@ -26,7 +26,9 @@ interface IProps {
 }
 
 const User: React.FC<IProps> = ({ user, openEditModal, handleRemoveUser }) => {
-  const [anchorEl, setAnchorEl] = useState<EventTarget & Element | null>(null);
+  const [anchorEl, setAnchorEl] = useState<(EventTarget & Element) | null>(
+    null
+  );
 
   const classes = useStyles();
   const theme = useTheme();
