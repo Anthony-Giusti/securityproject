@@ -2,7 +2,12 @@ import isAlpha from 'validator/es/lib/isAlpha';
 
 import { IUser } from '../../../shared/interfaces/User.interface';
 
-const validateUserNames = (user: IUser) => {
+const validateUserNames = (
+  user: IUser
+): {
+  firstName: boolean;
+  lastName: boolean;
+} => {
   const errors = {
     firstName: false,
     lastName: false,
