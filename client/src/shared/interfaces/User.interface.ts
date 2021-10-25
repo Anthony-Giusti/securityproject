@@ -14,4 +14,10 @@ export type userProperty =
   | 'lastName'
   | 'sex'
   | 'birthday';
+
 export type listOrder = 'ascending' | 'descending';
+
+export type closeEditModal = (
+  action: 'submit' | 'discard',
+  editedUser: IUser | null
+) => void;
