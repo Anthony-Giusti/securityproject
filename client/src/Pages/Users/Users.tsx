@@ -14,16 +14,26 @@ import EditModal from '../../components/EditModal/EditModal';
 import UsersHeader from './UsersHeader/UsersHeader';
 import brithdayStringToDate from '../../components/util/functions/birthdayStringToDate';
 
-import { IUser, userProperty, listOrder } from '../../shared/interfaces/User.interface';
+import {
+  IUser,
+  userProperty,
+  listOrder,
+  closeEditModal,
+} from '../../shared/interfaces/User.interface';
 
 interface IProps {
   userData: IUser[];
   removeUser: (userId: string) => void;
   submitEditedUser: (editedUser: IUser) => void;
-  fetchUserData: () => void; 
+  fetchUserData: () => void;
 }
 
-const Users: React.FC<IProps> = ({ userData, removeUser, submitEditedUser, fetchUserData }) => {
+const Users: React.FC<IProps> = ({
+  userData,
+  removeUser,
+  submitEditedUser,
+  fetchUserData,
+}) => {
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -44,7 +54,7 @@ const Users: React.FC<IProps> = ({ userData, removeUser, submitEditedUser, fetch
     setEditModalOpen(true);
   };
 
-  const closeEditModal = (action: string, editedUser: IUser | null) => {
+  const closeEditModal: closeEditModal = (action, editedUser) => {
     if (action === 'submit' && editedUser) {
       submitEditedUser(editedUser);
     }
@@ -95,18 +105,28 @@ const Users: React.FC<IProps> = ({ userData, removeUser, submitEditedUser, fetch
     return filteredUsers;
   };
 
-  const sortUsers = (users: IUser[], order: listOrder, listItem: userProperty) => {
+  const sortUsers = (
+    users: IUser[],
+    order: listOrder,
+    listItem: userProperty
+  ) => {
     const filteredUsers = users;
 
     if (order === 'descending') {
       filteredUsers.sort((a, b) =>
-        a[listItem as keyof IUser].toLowerCase() > b[listItem as keyof IUser].toLowerCase() ? 1 : -1
+        a[listItem as keyof IUser].toLowerCase() >
+        b[listItem as keyof IUser].toLowerCase()
+          ? 1
+          : -1
       );
     }
 
     if (order === 'ascending') {
       filteredUsers.sort((a, b) =>
-        a[listItem as keyof IUser].toLowerCase() < b[listItem as keyof IUser].toLowerCase() ? 1 : -1
+        a[listItem as keyof IUser].toLowerCase() <
+        b[listItem as keyof IUser].toLowerCase()
+          ? 1
+          : -1
       );
     }
 
@@ -138,9 +158,9 @@ const Users: React.FC<IProps> = ({ userData, removeUser, submitEditedUser, fetch
 
   const handleRemoveUser = () => {
     if (selectedUser && selectedUser._id) {
-    removeUser(selectedUser._id);
-    setSelectedUser(null);
-    setDeleteDialogOpen(false);
+      removeUser(selectedUser._id);
+      setSelectedUser(null);
+      setDeleteDialogOpen(false);
     }
   };
 
