@@ -66,7 +66,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={Theme}>
       <div className="App">
-        {/* <NavBar /> */}
+        <NavBar />
         <div className={classes.appMain}>
           <Switch>
             <Route exact path="/">
