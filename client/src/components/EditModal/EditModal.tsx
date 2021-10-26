@@ -16,11 +16,11 @@ import useStyles from './Styles';
 
 import UserForm from '../UserForm/UserForm';
 
-import { IUser } from '../../shared/interfaces/User.interface';
+import { IUser, closeEditModal } from '../../shared/interfaces/User.interface';
 
 interface IProps {
   editModalOpen: boolean;
-  closeEditModal: (action: string, editedUser: IUser | null) => void;
+  closeEditModal: closeEditModal;
   selectedUser: IUser;
 }
 
@@ -67,6 +67,12 @@ const EditModal: React.FC<IProps> = ({
     setEditModalConfirmOpen(false);
     setIsEdited(false);
     closeEditModal('submit', editedUser);
+  };
+
+  const confirmEdits = () => {
+    if (ref.current) {
+      ref.current.sendForm();
+    }
   };
 
   return (
@@ -142,7 +148,7 @@ const EditModal: React.FC<IProps> = ({
               variant="contained"
               startIcon={<CheckIcon />}
               color="primary"
-              onClick={ref.current.sendForm()}
+              onClick={confirmEdits}
             >
               Confirm Edits
             </Button>
