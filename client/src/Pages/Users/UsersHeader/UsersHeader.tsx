@@ -8,13 +8,16 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
-
 import UsersHeaderTools from './UsersHeaderTools/UsersHeaderTools';
 
 import useStyles from './Styles';
 import SortButton from '../../../components/SortButton/SortButton';
 
-import { IUser, userProperty, listOrder } from '../../../shared/interfaces/User.interface';
+import {
+  IUser,
+  userProperty,
+  listOrder,
+} from '../../../shared/interfaces/User.interface';
 
 interface IProps {
   handleSexFilter: (newSex: string) => void;
@@ -23,7 +26,12 @@ interface IProps {
   sexFilter: string[];
 }
 
-const UsersHeader: React.FC<IProps> = ({ handleSexFilter, sortUsers, userData, sexFilter }) => {
+const UsersHeader: React.FC<IProps> = ({
+  handleSexFilter,
+  sortUsers,
+  userData,
+  sexFilter,
+}) => {
   const [expandedHeader, setExpandedHeader] = useState(false);
   const [selectedSortBtn, setSelectedSortBtn] = useState('_id');
 
@@ -95,9 +103,9 @@ const UsersHeader: React.FC<IProps> = ({ handleSexFilter, sortUsers, userData, s
             onClick={handleExpandHeader}
           >
             {expandedHeader ? (
-              <ExpandLessIcon fontSize={smDevice ? 'default' : 'large'} />
+              <ExpandLessIcon fontSize={smDevice ? 'medium' : 'large'} />
             ) : (
-              <ExpandMoreIcon fontSize={smDevice ? 'default' : 'large'} />
+              <ExpandMoreIcon fontSize={smDevice ? 'medium' : 'large'} />
             )}
           </IconButton>
         </span>
